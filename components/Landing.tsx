@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import React from "react";
+import Button from "./buttons/Button";
 import LoginModal from "./modals/LoginModal";
 
 function Landing() {
@@ -7,21 +8,25 @@ function Landing() {
   return (
     <div className="flex flex-col flex-grow items-center">
       <div className="flex flex-col h-96 justify-center">
-        <h1>Text เฟี้ยว ๆ หน่อย</h1>
+        <h1 className="text-6xl md:text-7xl lg:text-9xl font-bold text-black drop-shadow-lg shadow-black">
+          JOLIE{" "}
+          <p className="text-2xl md:text-3xl lg:text-5xl">
+            &emsp;Customize Your Own Shampoo
+          </p>
+        </h1>
       </div>
       <div className="h-20">
-        <h2>premium customized shampoo for you</h2>
+        <h2 className="text-lg md:text-xl lg:text-2xl">
+          premium customized shampoo for you
+        </h2>
       </div>
-      <button
-        className="bg-[#fd839f] hover:bg-[#f1bfc0] text-white font-bold py-2 px-4 rounded transition ease delay-100"
-        type="button"
-        data-modal-toggle="authentication-modal"
+      <Button
         onClick={() => {
           router.push("/order/hairStyle");
         }}
       >
-        CREAT Your SHAMPOO
-      </button>
+        <b>CREAT Your SHAMPOO</b>
+      </Button>
     </div>
   );
 }

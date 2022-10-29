@@ -1,11 +1,18 @@
+@import url("https://fonts.googleapis.com/css2?family=Antic&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   body {
-    @apply bg-[white] text-[black];
+    @apply bg-[white] text-[black] font-Antic;
   }
 }
+
+/* :root {
+  --primary: #fd839f;
+  --second: red;
+} */
 
 /* #e7a7b6 */

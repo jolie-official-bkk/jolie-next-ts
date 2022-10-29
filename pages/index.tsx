@@ -1,13 +1,8 @@
 import Head from "next/head";
-import { useState } from "react";
-import Header from "../components/Header";
 import Landing from "../components/Landing";
-import LoginModal from "../components/modals/LoginModal";
-import RegisterModal from "../components/modals/RegisterModal";
+import Navbar from "../components/Navbar";
 
 export default function Home() {
-  const [showLoginModal, setShowLoginModal] = useState<boolean>(false);
-  const [showRegisterModal, setShowRegisterModal] = useState<boolean>(true);
   return (
     <div>
       <Head>
@@ -16,17 +11,8 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="h-screen">
-        <Header setShowLoginModal={setShowLoginModal} />
+        <Navbar />
         <Landing />
-        <LoginModal
-          showLoginModal={showLoginModal}
-          setShowLoginModal={setShowLoginModal}
-          setShowRegisterModal={setShowRegisterModal}
-        />
-        <RegisterModal
-          showRegisterModal={showRegisterModal}
-          setShowRegisterModal={setShowRegisterModal}
-        />
       </div>
     </div>
   );

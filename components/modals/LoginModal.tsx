@@ -55,7 +55,7 @@ function LoginModal({
         aria-hidden="true"
         className="overflow-y-auto overflow-x-hidden flex flex-col items-center absolute top-0 z-50 w-full h-screen bg-opacity-30 bg-black"
       >
-        <div className="relative flex flex-col justify-center p-4 w-full max-w-md h-full md:h-auto">
+        <div className="relative flex flex-col justify-center p-4 w-full max-w-md h-full">
           <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
             <div className="py-5 px-5 lg:px-8">
               <div className="flex h-12 justify-between">
