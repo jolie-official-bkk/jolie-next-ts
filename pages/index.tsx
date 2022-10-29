@@ -21,7 +21,6 @@ export default function Home() {
         <LoginModal
           showLoginModal={showLoginModal}
           setShowLoginModal={setShowLoginModal}
-          showRegisterModal={showRegisterModal}
           setShowRegisterModal={setShowRegisterModal}
         />
         <RegisterModal

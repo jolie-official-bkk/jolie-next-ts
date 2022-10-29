@@ -67,7 +67,7 @@ function RegisterModal({ showRegisterModal, setShowRegisterModal }: PropsType) {
                   Sign up
                 </h3>
                 <XIcon
-                  className="h-6 text-white"
+                  className="h-6 text-white cursor-pointer"
                   onClick={() => setShowRegisterModal(false)}
                 />
               </div>

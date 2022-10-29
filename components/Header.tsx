@@ -30,7 +30,7 @@ function Header({ setShowLoginModal }: PropsType) {
           </b>
         </div>
       </header>
-      <div className="h-2 bg-gradient-to-r from-[#fd839f] to-[#f1bfc0]"></div>
+      <div className="h-1.5 bg-gradient-to-r from-[#fd839f] to-[#f1bfc0]"></div>
     </Fragment>
   );
 }
