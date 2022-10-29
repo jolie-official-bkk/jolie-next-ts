@@ -92,12 +92,12 @@ const FOMULA = [
   },
 ];
 
-function HairFomula() {
+function HairFormula() {
   const router = useRouter();
   return (
     <div className="h-screen">
       <Navbar />
-      <Header>Customize Your Fomula</Header>
+      <Header>Customize Your Formula</Header>
       <div className="flex flex-col items-center h-3/4 overflow-y-auto">
         {FOMULA.map((item, itemIndex) => (
           <div
@@ -136,4 +136,4 @@ function HairFomula() {
   );
 }
 
-export default HairFomula;
+export default HairFormula;

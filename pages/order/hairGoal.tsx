@@ -28,7 +28,7 @@ function HairGoal() {
       <div className="flex w-full justify-center">
         <Button
           onClick={() => {
-            router.push("/order/hairFomula");
+            router.push("/order/hairFormula");
           }}
         >
           Next
