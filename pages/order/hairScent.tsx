@@ -8,23 +8,23 @@ import { OrderContext } from "../../contexts/OrderContext";
 
 const SCENT = [
   {
-    imageUrl: require("../../assets/images/primary-logo.jpg"),
+    imageUrl: require("../../public/images/primary-logo.jpg"),
     scent: "Aroma Galore",
   },
   {
-    imageUrl: require("../../assets/images/primary-logo.jpg"),
+    imageUrl: require("../../public/images/primary-logo.jpg"),
     scent: "Aroma Queen",
   },
   {
-    imageUrl: require("../../assets/images/primary-logo.jpg"),
+    imageUrl: require("../../public/images/primary-logo.jpg"),
     scent: "Essence Flair",
   },
   {
-    imageUrl: require("../../assets/images/primary-logo.jpg"),
+    imageUrl: require("../../public/images/primary-logo.jpg"),
     scent: "Fragrance Harmony",
   },
   {
-    imageUrl: require("../../assets/images/primary-logo.jpg"),
+    imageUrl: require("../../public/images/primary-logo.jpg"),
     scent: "Scentaholic",
   },
 ];

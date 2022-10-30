@@ -25,6 +25,7 @@ function HairStyle() {
         <div className="flex justify-evenly">
           {naturalHairTypeArray.map((item: TNaturaHair, itemIndex) => (
             <div
+              key={itemIndex}
               className={
                 orderContext.natural_hair_type === item
                   ? "bg-primary/[0.3]"
@@ -50,6 +51,7 @@ function HairStyle() {
         <div className="flex justify-evenly">
           {hairStructure.map((item: TNaturaHair, itemIndex) => (
             <div
+              key={itemIndex}
               className={
                 orderContext.hair_structure === item ? "bg-primary/[0.3]" : ""
               }
@@ -73,6 +75,7 @@ function HairStyle() {
         <div className="flex justify-evenly">
           {scalpMoisture.map((item: TNaturaHair, itemIndex) => (
             <div
+              key={itemIndex}
               className={
                 orderContext.scalp_moisture === item ? "bg-primary/[0.3]" : ""
               }

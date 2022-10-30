@@ -58,7 +58,7 @@ function HairFormula() {
             <div className="flex items-center">
               <p className="mr-2">{item}</p>
               <Image
-                src={require("../../assets/images/primary-logo.jpg")}
+                src={require("../../public/images/primary-logo.jpg")}
                 alt={"ingredient not found"}
                 className="w-8 h-8 mr-2"
               />

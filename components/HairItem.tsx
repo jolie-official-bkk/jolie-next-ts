@@ -9,7 +9,7 @@ function HairItem({ item }: PropsType) {
   return (
     <Fragment>
       <Image
-        src={require("../assets/images/primary-logo.jpg")}
+        src={require("../public/images/primary-logo.jpg")}
         alt={"item not found"}
         className={"w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28"}
       />

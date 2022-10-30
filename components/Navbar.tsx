@@ -1,11 +1,50 @@
-import { Fragment, useState } from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
+import { getUserInfo } from "../api/user";
+import { UserContext } from "../contexts/UserContext";
 import Button from "./buttons/Button";
 import LoginModal from "./modals/LoginModal";
 import RegisterModal from "./modals/RegisterModal";
 
 function Navbar() {
+  const { user, setUser, isAuthenticated, setIsAuthenticated } =
+    useContext(UserContext);
   const [showLoginModal, setShowLoginModal] = useState<boolean>(false);
   const [showRegisterModal, setShowRegisterModal] = useState<boolean>(false);
+
+  useEffect(() => {
+    let isSubscribed = true;
+    handleGetUserInfo().then((response) => {
+      if (isSubscribed) {
+        if (response !== undefined && user === null) {
+          console.log(response);
+
+          setUser(response.data);
+        }
+      }
+    });
+
+    return () => {
+      isSubscribed = false;
+    };
+    // eslint-disable-next-line
+  }, [isAuthenticated]);
+
+  async function handleGetUserInfo(): Promise<any> {
+    try {
+      const token = localStorage.getItem("token");
+      if (token !== null) {
+        return await getUserInfo(token);
+      }
+    } catch (error: any) {
+      console.error(error.message);
+    }
+  }
+
+  function handleLogout(): void {
+    localStorage.removeItem("token");
+    setIsAuthenticated(false);
+  }
+
   return (
     <Fragment>
       <header className="flex h-12 lg:h-20 px-5 py-2 bg-white">
@@ -28,13 +67,29 @@ function Navbar() {
           >
             Sign in
           </button> */}
-          <Button
-            onClick={() => {
-              setShowLoginModal(true);
-            }}
-          >
-            Sign in
-          </Button>
+          {!isAuthenticated && (
+            <Button
+              onClick={() => {
+                setShowLoginModal(true);
+              }}
+            >
+              Sign in
+            </Button>
+          )}
+          {isAuthenticated && (
+            // <p className="text-xl">{`${user?.first_name}`}</p>
+            <div
+              className="inline-flex overflow-hidden relative justify-center items-center w-10 h-10 rounded-full bg-primary/[0.5]"
+              onClick={() => {
+                handleLogout();
+              }}
+            >
+              <span className="font-medium text-white">
+                {user?.first_name.charAt(0).toUpperCase()}
+                {user?.last_name.charAt(0).toUpperCase()}
+              </span>
+            </div>
+          )}
         </div>
       </header>
       <div className="h-1.5 bg-gradient-to-r from-primary to-primary/[0.3]" />

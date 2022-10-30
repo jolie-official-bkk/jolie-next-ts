@@ -5,12 +5,14 @@ import React, {
   FormEvent,
   Fragment,
   SetStateAction,
+  useContext,
   useState,
 } from "react";
 import { ILogin } from "../../interfaces/user.interface";
 import { handleLogin } from "../../api/auth";
 import TextInput from "../inputs/TextInput";
 import CircleSpinner from "../loadings/CircleSpinner";
+import { UserContext } from "../../contexts/UserContext";
 
 type PropsType = {
   showLoginModal: boolean;
@@ -23,6 +25,7 @@ function LoginModal({
   setShowLoginModal,
   setShowRegisterModal,
 }: PropsType) {
+  const { setIsAuthenticated } = useContext(UserContext);
   const [submission, setSubmission] = useState<ILogin>({
     email: "",
     password: "",
@@ -48,6 +51,8 @@ function LoginModal({
       await handleLogin(requestBody).then((response) => {
         if (response) {
           localStorage.setItem("token", response.data.token);
+          setIsAuthenticated(true);
+          setShowLoginModal(false);
         }
         setIsSubmitting(false);
       });
