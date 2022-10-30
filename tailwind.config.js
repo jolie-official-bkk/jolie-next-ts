@@ -9,6 +9,7 @@ module.exports = {
     extend: {
       colors: {
         primary: "#fd839f",
+        disabled: "#ccc",
       },
       fontFamily: {
         Antic: ["Antic", "cursive"],

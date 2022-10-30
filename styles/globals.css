@@ -6,7 +6,7 @@
 
 @layer base {
   body {
-    @apply bg-[white] text-[black] font-Antic;
+    @apply bg-[url('../public/images/marble.jpg')] bg-no-repeat bg-cover bg-center bg-fixed text-[black] font-Antic;
   }
 }
 

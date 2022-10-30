@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import Navbar from "../../components/Navbar";
-import HairItem from "../../components/modals/HairItem";
+import HairItem from "../../components/HairItem";
 import {
   hairStructure,
   naturalHairTypeArray,
@@ -11,21 +11,11 @@ import {
 import Header from "../../components/Header";
 import SubHeader from "../../components/SubHeader";
 import Button from "../../components/buttons/Button";
-import { IOrder } from "../../interfaces/order.interface";
+import { OrderContext } from "../../contexts/OrderContext";
 
 function HairStyle() {
   const router = useRouter();
-  const [submission, setSubmission] = useState<IOrder>({
-    natural_hair_type: null,
-    hair_structure: null,
-    scalp_moisture: null,
-    hair_treat: [],
-    hair_goal: [],
-    fomular: [],
-    color: null,
-    scent: null,
-    shampoo_name: null,
-  });
+  const { orderContext, setOrderContext } = useContext(OrderContext);
   return (
     <div className="h-screen">
       <Navbar />
@@ -36,13 +26,16 @@ function HairStyle() {
           {naturalHairTypeArray.map((item: TNaturaHair, itemIndex) => (
             <div
               className={
-                submission.natural_hair_type === item ? "bg-red-100" : ""
+                orderContext.natural_hair_type === item
+                  ? "bg-primary/[0.3]"
+                  : ""
               }
+              style={{ cursor: "pointer" }}
               onClick={() => {
-                setSubmission({
-                  ...submission,
-                  ["natural_hair_type"]: submission.natural_hair_type
-                    ? submission.natural_hair_type === item
+                setOrderContext({
+                  ...orderContext,
+                  ["natural_hair_type"]: orderContext.natural_hair_type
+                    ? orderContext.natural_hair_type === item
                       ? null
                       : item
                     : item,
@@ -56,7 +49,22 @@ function HairStyle() {
         <SubHeader>Hair Structure</SubHeader>
         <div className="flex justify-evenly">
           {hairStructure.map((item: TNaturaHair, itemIndex) => (
-            <div>
+            <div
+              className={
+                orderContext.hair_structure === item ? "bg-primary/[0.3]" : ""
+              }
+              style={{ cursor: "pointer" }}
+              onClick={() => {
+                setOrderContext({
+                  ...orderContext,
+                  ["hair_structure"]: orderContext.hair_structure
+                    ? orderContext.hair_structure === item
+                      ? null
+                      : item
+                    : item,
+                });
+              }}
+            >
               <HairItem key={itemIndex} item={item} />
             </div>
           ))}
@@ -64,7 +72,22 @@ function HairStyle() {
         <SubHeader>Scalp Moisture</SubHeader>
         <div className="flex justify-evenly">
           {scalpMoisture.map((item: TNaturaHair, itemIndex) => (
-            <div>
+            <div
+              className={
+                orderContext.scalp_moisture === item ? "bg-primary/[0.3]" : ""
+              }
+              style={{ cursor: "pointer" }}
+              onClick={() => {
+                setOrderContext({
+                  ...orderContext,
+                  ["scalp_moisture"]: orderContext.scalp_moisture
+                    ? orderContext.scalp_moisture === item
+                      ? null
+                      : item
+                    : item,
+                });
+              }}
+            >
               <HairItem key={itemIndex} item={item} />
             </div>
           ))}
@@ -72,8 +95,15 @@ function HairStyle() {
       </div>
       <div className="flex w-full justify-center">
         <Button
+          disabled={
+            !orderContext.natural_hair_type ||
+            !orderContext.hair_structure ||
+            !orderContext.scalp_moisture
+          }
           onClick={() => {
-            router.push("/order/hairTreat");
+            router.push({
+              pathname: "/order/hairTreat",
+            });
           }}
         >
           Next

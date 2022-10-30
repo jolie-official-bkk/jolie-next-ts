@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import OutlinedButton from "../../components/buttons/OutlinedButton";
 import Navbar from "../../components/Navbar";
-import TextInput from "../../components/inputs/TextInput";
 import Header from "../../components/Header";
 import Button from "../../components/buttons/Button";
+import { useRouter } from "next/router";
+import { OrderContext } from "../../contexts/OrderContext";
 
 function Summary() {
+  const router = useRouter();
+
+  const { orderContext, setOrderContext } = useContext(OrderContext);
+
   return (
     <div className="h-screen">
       <Navbar />
@@ -14,6 +19,8 @@ function Summary() {
         <div className="flex justify-center">
           <OutlinedButton>Join Me</OutlinedButton>
         </div>
+        <Header>Order Summary</Header>
+        <p>{JSON.stringify(orderContext)}</p>
         <Header>Name Your Bottle</Header>
         <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg my-5 focus:ring-blue-500 focus:border-blue-500 block p-2.5" />
         <div className="flex justify-center">

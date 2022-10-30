@@ -6,7 +6,7 @@ function Button(props: ButtonProps): ReactElement<ButtonProps> {
   const { children, ...rest } = props;
   return (
     <button
-      className="bg-primary text-white rounded py-1 px-2"
+      className="bg-primary disabled:bg-disabled text-white rounded py-1 px-2"
       style={{ minWidth: 80 }}
       {...rest}
     >

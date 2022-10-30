@@ -1,8 +1,9 @@
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useContext } from "react";
 import Button from "../../components/buttons/Button";
 import Header from "../../components/Header";
 import Navbar from "../../components/Navbar";
+import { OrderContext } from "../../contexts/OrderContext";
 
 const COLOR = [
   {
@@ -29,6 +30,9 @@ const COLOR = [
 
 function HairColor() {
   const router = useRouter();
+
+  const { orderContext, setOrderContext } = useContext(OrderContext);
+
   return (
     <div className="h-screen">
       <Navbar />
@@ -39,13 +43,22 @@ function HairColor() {
             return (
               <div
                 key={colorIndex}
-                className="flex flex-col justify-center mx-auto"
+                className={`flex flex-col justify-center m-auto ${
+                  orderContext.color === color.hexColor
+                    ? "bg-primary/[0.5]"
+                    : ""
+                }`}
+                onClick={() => {
+                  setOrderContext({ ...orderContext, color: color.hexColor });
+                }}
               >
                 <div
-                  className={`w-20 h-20 rounded-full border border-black`}
+                  className={`w-20 h-20 md:w-32 md:h-32 rounded-full border border-black`}
                   style={{ background: `${color.hexColor}` }}
                 />
-                <p className="text-center">{color.colorName}</p>
+                <p className="text-center md:text-2xl lg:text-3xl">
+                  {color.colorName}
+                </p>
               </div>
             );
           })}
@@ -54,7 +67,9 @@ function HairColor() {
       <div className="flex w-full justify-center">
         <Button
           onClick={() => {
-            router.push("/order/hairScent");
+            router.push({
+              pathname: "/order/hairScent",
+            });
           }}
         >
           Next

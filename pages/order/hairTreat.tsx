@@ -1,13 +1,51 @@
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useContext } from "react";
 import Button from "../../components/buttons/Button";
-import OutlinedButton from "../../components/buttons/OutlinedButton";
 import Header from "../../components/Header";
 import Navbar from "../../components/Navbar";
+import { OrderContext } from "../../contexts/OrderContext";
 import { hairTreat } from "../../interfaces/hair.interface";
 
 function HairTreat() {
   const router = useRouter();
+
+  const { orderContext, setOrderContext } = useContext(OrderContext);
+
+  function checkItemClicked(item: string): boolean {
+    if (orderContext.hair_treat) {
+      return orderContext.hair_treat.includes(item);
+    }
+
+    return false;
+  }
+
+  function onItemClicked(item: string): void {
+    if (orderContext.hair_treat) {
+      if (checkItemClicked(item)) {
+        setOrderContext({
+          ...orderContext,
+          hair_treat: orderContext.hair_treat.filter(
+            (_item: string) => _item !== item
+          ),
+        });
+      } else {
+        if (item === "none of these" || item === "natural hair") {
+          setOrderContext({ ...orderContext, hair_treat: [item] });
+        } else {
+          setOrderContext({
+            ...orderContext,
+            hair_treat: [
+              ...orderContext.hair_treat.filter(
+                (_item) => !["none of these", "natural hair"].includes(_item)
+              ),
+              item,
+            ],
+          });
+        }
+      }
+    }
+  }
+
   return (
     <div className="h-screen">
       <Navbar />
@@ -17,9 +55,23 @@ function HairTreat() {
           {hairTreat.map((item: string, itemIndex) => (
             <div
               key={itemIndex}
-              className="bg-red-200 text-center w-32 lg:w-48 py-2 mx-auto rounded-full"
+              className={
+                checkItemClicked(item)
+                  ? "border-4 border-primary rounded-full"
+                  : ""
+              }
+              style={{ cursor: "pointer" }}
+              onClick={() => {
+                onItemClicked(item);
+              }}
             >
-              <p className="text-lg lg:text-2xl">{item}</p>
+              <p
+                className={`text-lg lg:text-2xl bg-red-200 text-center py-${
+                  checkItemClicked(item) ? "1" : "2"
+                } mx-auto rounded-full`}
+              >
+                {item}
+              </p>
             </div>
           ))}
         </div>
@@ -27,7 +79,9 @@ function HairTreat() {
       <div className="flex w-full justify-center">
         <Button
           onClick={() => {
-            router.push("/order/hairGoal");
+            router.push({
+              pathname: "/order/hairGoal",
+            });
           }}
         >
           Next

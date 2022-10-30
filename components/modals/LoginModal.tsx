@@ -8,6 +8,7 @@ import React, {
   useState,
 } from "react";
 import { ILogin } from "../../interfaces/user.interface";
+import { handleLogin } from "../../api/auth";
 import TextInput from "../inputs/TextInput";
 import CircleSpinner from "../loadings/CircleSpinner";
 
@@ -35,15 +36,21 @@ function LoginModal({
     });
   }
 
-  async function handleLogin(event: FormEvent<HTMLFormElement>): Promise<void> {
+  async function handleFormSubmit(
+    event: FormEvent<HTMLFormElement>
+  ): Promise<void> {
     event.preventDefault();
 
+    setIsSubmitting(true);
+    const requrest: ILogin = { ...submission };
+    const requestBody = JSON.stringify(requrest);
     try {
-      setIsSubmitting(true);
-      setTimeout(() => {
-        console.log(submission);
+      await handleLogin(requestBody).then((response) => {
+        if (response) {
+          localStorage.setItem("token", response.data.token);
+        }
         setIsSubmitting(false);
-      }, 1000);
+      });
     } catch (error: any) {
       console.error(error.message);
     }
@@ -60,14 +67,14 @@ function LoginModal({
             <div className="py-5 px-5 lg:px-8">
               <div className="flex h-12 justify-between">
                 <h3 className="text-xl font-medium text-gray-900 dark:text-white">
-                  Sign up
+                  Sign in
                 </h3>
                 <XIcon
                   className="h-6 text-white cursor-pointer"
                   onClick={() => setShowLoginModal(false)}
                 />
               </div>
-              <form className="space-y-2" onSubmit={handleLogin}>
+              <form className="space-y-2" onSubmit={handleFormSubmit}>
                 <TextInput
                   label={"Your Email"}
                   name={"email"}
