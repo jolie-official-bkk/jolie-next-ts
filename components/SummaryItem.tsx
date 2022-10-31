@@ -23,7 +23,7 @@ function displayDetail(detail: string | string[]): string | JSX.Element[] {
 
 function SummaryItem({ header, detail }: PropsType) {
   return (
-    <div className="flex tracking-wide">
+    <div className="flex items-center tracking-wide">
       {header === "color" && (
         <Fragment>
           <b className="md:text-lg lg:text-xl">

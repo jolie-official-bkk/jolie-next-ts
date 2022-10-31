@@ -1,5 +1,7 @@
 import { Fragment, useContext, useEffect, useState } from "react";
 import { getUserInfo } from "../api/user";
+import { OrderContext } from "../contexts/OrderContext";
+import { SystemContext } from "../contexts/SystemContext";
 import { UserContext } from "../contexts/UserContext";
 import Button from "./buttons/Button";
 import LoginModal from "./modals/LoginModal";
@@ -8,17 +10,24 @@ import RegisterModal from "./modals/RegisterModal";
 function Navbar() {
   const { user, setUser, isAuthenticated, setIsAuthenticated } =
     useContext(UserContext);
-  const [showLoginModal, setShowLoginModal] = useState<boolean>(false);
-  const [showRegisterModal, setShowRegisterModal] = useState<boolean>(false);
+  const { orderContext, setOrderContext } = useContext(OrderContext)
+  const { showLoginModal, setShowLoginModal, showRegisterModal, setShowRegisterModal } = useContext(SystemContext)
 
   useEffect(() => {
     let isSubscribed = true;
-    handleGetUserInfo().then((response) => {
+    handleGetUserInfo().then(async (response) => {
       if (isSubscribed) {
-        if (response !== undefined && user === null) {
-          console.log(response);
-
+        if (response?.status === "OK" && user === null) {
           setUser(response.data);
+          const token = localStorage.getItem("token")
+          if (user === null && token !== null) {
+            await getUserInfo(token).then((response) => {
+              if (response?.status === "OK") {
+                setUser(response.data);
+                setOrderContext({ ...orderContext, user_id: response.data.user_id })
+              }
+            })
+          }
         }
       }
     });
@@ -86,7 +95,7 @@ function Navbar() {
                 handleLogout();
               }}
             >
-              <span className="font-medium text-white">
+              <span className="font-medium md:font-lg lg:font-xl text-white">
                 {user?.first_name.charAt(0).toUpperCase()}
                 {user?.last_name.charAt(0).toUpperCase()}
               </span>

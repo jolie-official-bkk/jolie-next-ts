@@ -21,7 +21,7 @@ type PropsType = {
 };
 
 function RegisterModal({ showRegisterModal, setShowRegisterModal }: PropsType) {
-  const {setIsAuthenticated} = useContext(UserContext)
+  const { setIsAuthenticated } = useContext(UserContext)
   const [submission, setSubmission] = useState<IRegister>({
     first_name: "",
     last_name: "",
@@ -46,12 +46,12 @@ function RegisterModal({ showRegisterModal, setShowRegisterModal }: PropsType) {
     event.preventDefault();
 
     setIsSubmitting(true);
-    const {confirm_password, ...rest} = submission;
-    const request: IRegister = {...rest}
+    const { confirm_password, ...rest } = submission;
+    const request: IRegister = { ...rest }
     const requestBody = JSON.stringify(request)
 
     console.log(requestBody);
-    
+
     try {
       await handleRegister(requestBody).then((response) => {
         if (response && response.status == "OK") {
@@ -140,7 +140,11 @@ function RegisterModal({ showRegisterModal, setShowRegisterModal }: PropsType) {
                   type="submit"
                   className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 >
-                  {isSubmitting && <CircleSpinner />} Register
+                  {isSubmitting ?
+                    <CircleSpinner /> :
+                    <p>
+                      Register
+                    </p>}
                 </button>
               </form>
             </div>
