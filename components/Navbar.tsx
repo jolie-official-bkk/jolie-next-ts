@@ -42,6 +42,8 @@ function Navbar() {
 
   function handleLogout(): void {
     localStorage.removeItem("token");
+    setUser(null)
+    setIsAuthenticated(false)
     setIsAuthenticated(false);
   }
 
