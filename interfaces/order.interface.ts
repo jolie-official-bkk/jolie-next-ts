@@ -3,13 +3,13 @@ import {
   THairGoal,
   THairStructure,
   THairTreat,
-  TNaturaHair,
+  TNaturalHair,
   TScalpMoisture,
   TScent,
 } from "./hair.interface";
 
 export interface IOrder {
-  natural_hair_type: TNaturaHair | null;
+  natural_hair_type: TNaturalHair | null;
   hair_structure: THairStructure | null;
   scalp_moisture: TScalpMoisture | null;
   hair_treat: THairTreat[] | null;

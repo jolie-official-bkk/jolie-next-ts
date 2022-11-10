@@ -1,15 +1,25 @@
 import { useRouter } from "next/router";
-import React, { useContext } from "react";
-import Button from "../../components/buttons/Button";
+import React, { useContext, useEffect } from "react";
 import Header from "../../components/Header";
-import Navbar from "../../components/Navbar";
+import SubHeader from "../../components/SubHeader";
 import { OrderContext } from "../../contexts/OrderContext";
-import { hairTreat } from "../../interfaces/hair.interface";
+import { camelCase } from "../../functions/camelCase";
+import { hairTreat, THairTreat } from "../../interfaces/hair.interface";
+import { FormLayout } from "../../layouts/FormLayout";
 
 function HairTreat() {
   const router = useRouter();
 
-  const { orderContext, setOrderContext } = useContext(OrderContext);
+  const { orderContext, setOrderContext, setCurrentStep } =
+    useContext(OrderContext);
+
+  useEffect(() => {
+    setCurrentStep(2);
+  }, []);
+
+  function handleClickNext() {
+    router.push("/order/hairGoal");
+  }
 
   function checkItemClicked(item: string): boolean {
     if (orderContext.hair_treat) {
@@ -47,48 +57,49 @@ function HairTreat() {
   }
 
   return (
-    <div className="h-screen">
-      <Navbar />
+    <div className="flex flex-grow flex-col">
       <Header>Do you color or treat your hair ?</Header>
-      <div className="flex flex-col h-3/4 justify-evenly">
-        <div className="px-5 my-4 grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-12">
-          {hairTreat.map((item: string, itemIndex) => (
+      <div className="flex flex-grow flex-col">
+        <SubHeader>Select all that apply</SubHeader>
+        <div className="mb-2 grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-1">
+          {hairTreat.map((item: THairTreat, itemIndex) => (
             <div
               key={itemIndex}
-              className={
-                checkItemClicked(item)
-                  ? "border-4 border-primary rounded-full"
-                  : ""
-              }
-              style={{ cursor: "pointer" }}
+              className={`flex flex-grow items-center
+                ${checkItemClicked(item) ? "border-4 border-primary" : ""}
+              rounded-lg`}
+              style={{
+                cursor: "pointer",
+                boxShadow: "0px 3px 5px 1px rgba(0, 0, 0, 0.3)",
+                // background: "red",
+              }}
               onClick={() => {
                 onItemClicked(item);
               }}
             >
-              <p
-                className={`text-lg lg:text-2xl bg-red-200 text-center py-${
+              <b
+                className={`flex items-center text-lg lg:text-2xl text-center py-${
                   checkItemClicked(item) ? "1" : "2"
-                } mx-auto rounded-full`}
+                } mx-auto`}
               >
-                {item}
-              </p>
+                {camelCase(item)}
+              </b>
             </div>
           ))}
         </div>
       </div>
-      <div className="flex w-full justify-center">
-        <Button
-          onClick={() => {
-            router.push({
-              pathname: "/order/hairGoal",
-            });
-          }}
-        >
-          Next
-        </Button>
+      <div
+        className="flex h-12 justify-center items-center sticky bottom-0 text-white bg-black"
+        onClick={() => {
+          handleClickNext();
+        }}
+      >
+        Next
       </div>
     </div>
   );
 }
+
+HairTreat.PageLayout = FormLayout;
 
 export default HairTreat;

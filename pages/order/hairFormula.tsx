@@ -1,16 +1,35 @@
-import Image from "next/image";
 import { useRouter } from "next/router";
-import React, { useContext } from "react";
-import Button from "../../components/buttons/Button";
+import React, { useContext, useEffect } from "react";
+import FormulaCard from "../../components/card/FormulaCard";
 import Header from "../../components/Header";
-import Navbar from "../../components/Navbar";
+import SubHeader from "../../components/SubHeader";
 import { OrderContext } from "../../contexts/OrderContext";
-import { formula } from "../../interfaces/hair.interface";
+import { formulaName, TFormulaName } from "../../interfaces/hair.interface";
+import { FormLayout } from "../../layouts/FormLayout";
+
+const FORMULA_DETAIL: string[] = [
+  "Damage remedy : coconut, bran, jojoba, evening primrose",
+  "Anti-dandruff : evening primrose, sunflower seed, moringa, sweet almond",
+  "Color protection : moringa, evening primrose, rose hip, sesame",
+  "Thermal protection : coconut, avocado, macadamia, grape seed",
+  "Shine : bergamot, sesame, bran, sunflower seed",
+  "Strengthen : tea tree, moringa, jojoba, sunflower seed",
+  "Oil control : rose hip, coconut, sweet almond, grape seed",
+];
 
 function HairFormula() {
   const router = useRouter();
 
-  const { orderContext, setOrderContext } = useContext(OrderContext);
+  const { orderContext, setOrderContext, setCurrentStep } =
+    useContext(OrderContext);
+
+  useEffect(() => {
+    setCurrentStep(4);
+  }, []);
+
+  function handleClickNext() {
+    router.push("/order/hairColor");
+  }
 
   function checkItemClicked(item: string): boolean {
     if (orderContext.fomular) {
@@ -38,54 +57,32 @@ function HairFormula() {
     }
   }
   return (
-    <div className="h-screen">
-      <Navbar />
-      <Header>Customize Your Formula</Header>
-      <div className="flex flex-col items-center h-3/4 overflow-y-auto">
-        {formula.map((item: string, itemIndex) => (
-          <div
-            key={itemIndex}
-            className={`flex items-center justify-between border border-${
-              checkItemClicked(item) ? "primary" : "black"
-            } m-2 px-2 py-1 ${
-              checkItemClicked(item) ? "bg-primary/[0.5]" : ""
-            }`}
-            style={{ width: 320, cursor: "pointer" }}
-            onClick={() => {
-              onItemClicked(item);
-            }}
-          >
-            <div className="flex items-center">
-              <p className="mr-2">{item}</p>
-              <Image
-                src={require("../../public/images/primary-logo.jpg")}
-                alt={"ingredient not found"}
-                className="w-8 h-8 mr-2"
-              />
-              {" - "}
-              {"item goal"}
-            </div>
-            <p className="text-sm mt-3 underline decoration-dotted">
-              more detail
-            </p>
+    <div className="flex flex-grow flex-col">
+      <Header>Customize your formula</Header>
+      <div className="flex flex-grow flex-col items-center overflow-y-auto">
+        <SubHeader>Choose up to 3</SubHeader>
+        {formulaName.map((item: TFormulaName, itemIndex) => (
+          <div onClick={() => onItemClicked(item)}>
+            <FormulaCard
+              key={itemIndex}
+              formulaName={item}
+              formulaDetail={FORMULA_DETAIL[itemIndex]}
+            />
           </div>
         ))}
-        {/* <div>
-        </div> */}
       </div>
-      <div className="flex w-full justify-center">
-        <Button
-          onClick={() => {
-            router.push({
-              pathname: "/order/hairColor",
-            });
-          }}
-        >
-          Next
-        </Button>
+      <div
+        className="flex h-12 justify-center items-center sticky bottom-0 text-white bg-black"
+        onClick={() => {
+          handleClickNext();
+        }}
+      >
+        Next
       </div>
     </div>
   );
 }
+
+HairFormula.PageLayout = FormLayout;
 
 export default HairFormula;

@@ -13,6 +13,8 @@ interface Props {
 interface IOrderContext {
   orderContext: IOrder;
   setOrderContext: Dispatch<SetStateAction<IOrder>>;
+  currentStep: number;
+  setCurrentStep: Dispatch<SetStateAction<number>>;
 }
 
 const OrderContextState = {
@@ -28,6 +30,8 @@ const OrderContextState = {
     shampoo_name: null,
   },
   setOrderContext: () => {},
+  currentStep: 1,
+  setCurrentStep: () => {},
 };
 
 export const OrderContext = createContext<IOrderContext>(OrderContextState);
@@ -36,12 +40,15 @@ export const OrderContextProvider = ({ children }: Props) => {
   const [orderContext, setOrderContext] = useState<IOrder>(
     OrderContextState.orderContext
   );
+  const [currentStep, setCurrentStep] = useState(1);
 
   return (
     <OrderContext.Provider
       value={{
         orderContext,
         setOrderContext,
+        currentStep,
+        setCurrentStep,
       }}
     >
       {children}
