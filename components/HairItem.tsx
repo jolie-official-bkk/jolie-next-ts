@@ -11,10 +11,12 @@ function HairItem({ item, imagePrefix }: PropsType) {
   return (
     <div className="flex flex-col flex-grow">
       <Image
-        src={require(`../public/images/hairStyle/${imagePrefix}-${item}.png`)}
+        src={`/../public/images/hairStyle/${imagePrefix}-${item}.png`}
         alt={"item not found"}
+        width={300}
+        height={400}
       />
-      <b className="flex flex-col h-8 justify-center text-center text-sm md:text-3xl lg:text-5xl bg-white">
+      <b className="flex flex-col h-8 justify-center text-center text-sm md:text-2xl lg:text-3xl bg-white">
         {camelCase(item)}
       </b>
     </div>

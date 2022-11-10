@@ -31,7 +31,7 @@ const OrderContextState = {
     shampoo_name: null,
   },
   setOrderContext: () => {},
-  currentStep: 1,
+  currentStep: 0,
   setCurrentStep: () => {},
 };
 
@@ -41,7 +41,7 @@ export const OrderContextProvider = ({ children }: Props) => {
   const [orderContext, setOrderContext] = useState<IOrder>(
     OrderContextState.orderContext
   );
-  const [currentStep, setCurrentStep] = useState(1);
+  const [currentStep, setCurrentStep] = useState(OrderContextState.currentStep);
 
   return (
     <OrderContext.Provider

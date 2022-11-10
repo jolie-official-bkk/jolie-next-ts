@@ -58,7 +58,6 @@ function HairFormula() {
   }
   return (
     <div className="flex flex-grow flex-col">
-      <Header>Customize your formula</Header>
       <div className="flex flex-grow flex-col items-center overflow-y-auto">
         <SubHeader>Choose up to 3</SubHeader>
         {formulaName.map((item: TFormulaName, itemIndex) => (
@@ -71,14 +70,15 @@ function HairFormula() {
           </div>
         ))}
       </div>
-      <div
+      <button
         className="flex h-12 justify-center items-center sticky bottom-0 text-white bg-black"
         onClick={() => {
           handleClickNext();
         }}
+        disabled={!!!orderContext.formula?.length}
       >
         Next
-      </div>
+      </button>
     </div>
   );
 }

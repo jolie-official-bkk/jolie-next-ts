@@ -21,7 +21,6 @@ function OrderShampoo() {
 
   return (
     <div className="flex flex-grow flex-col">
-      <Header>Make it your own!</Header>
       <div className="flex flex-grow flex-col" />
       <div
         className="flex h-12 justify-center items-center sticky bottom-0 text-white bg-black"

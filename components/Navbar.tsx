@@ -6,9 +6,20 @@ import { getUserInfo } from "../api/user";
 import { OrderContext } from "../contexts/OrderContext";
 import { SystemContext } from "../contexts/SystemContext";
 import { UserContext } from "../contexts/UserContext";
+import Header from "./Header";
 import LoginModal from "./modals/LoginModal";
 import RegisterModal from "./modals/RegisterModal";
 import Stepper from "./step/Stepper";
+
+const HEADER_TEXT: string[] = [
+  "Choose your hair style",
+  "Do you color or treat your hair ?",
+  "Select your hair goals",
+  "Customize your formula",
+  "Select your color",
+  "Select your fragrance",
+  "Make it your own!",
+];
 
 function Navbar() {
   const router = useRouter();
@@ -78,13 +89,16 @@ function Navbar() {
       <header className="flex h-12 lg:h-20 pr-4 py-2 bg-white drop-shadow-lg shadow-black">
         <div className="flex flex-grow">
           <ChevronLeftIcon
+            className={`text-${!!currentStep ? "black" : "white"}`}
             onClick={() => {
-              handleGoBack();
+              if (!!currentStep) {
+                handleGoBack();
+              }
             }}
           />
         </div>
         <div className="flex items-center">
-          <h1 className="text-2xl lg:text-4xl font-bold text-black">JOLIE</h1>
+          <h1 className="text-2xl lg:text-4xl font-medium text-black">JOLIE</h1>
         </div>
         <div className="flex flex-grow justify-end items-center">
           {!isAuthenticated && (
@@ -103,7 +117,8 @@ function Navbar() {
           )}
         </div>
       </header>
-      <Stepper step={currentStep} />
+      {!!currentStep && <Stepper step={currentStep} />}
+      {!!currentStep && <Header>{HEADER_TEXT[currentStep - 1]}</Header>}
       <LoginModal
         showLoginModal={showLoginModal}
         setShowLoginModal={setShowLoginModal}

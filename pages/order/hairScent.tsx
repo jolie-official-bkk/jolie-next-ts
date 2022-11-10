@@ -52,7 +52,6 @@ function HairScent() {
 
   return (
     <div className="flex flex-grow flex-col">
-      <Header>Select Your Scent</Header>
       <div className="flex flex-grow flex-col">
         <div className="px-1 py-4 grid grid-cols-2 sm:grid-cols-3 gap-1 overflow-y-auto">
           {SCENT.map((scent, scentIndex) => {
@@ -69,14 +68,15 @@ function HairScent() {
           })}
         </div>
       </div>
-      <div
+      <button
         className="flex h-12 justify-center items-center sticky bottom-0 text-white bg-black"
         onClick={() => {
           handleClickNext();
         }}
+        disabled={!orderContext.scent}
       >
         Next
-      </div>
+      </button>
     </div>
   );
 }

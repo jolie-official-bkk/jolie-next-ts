@@ -58,7 +58,6 @@ function HairTreat() {
 
   return (
     <div className="flex flex-grow flex-col">
-      <Header>Do you color or treat your hair ?</Header>
       <div className="flex flex-grow flex-col">
         <SubHeader>Select all that apply</SubHeader>
         <div className="mb-2 grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-1">
@@ -88,14 +87,15 @@ function HairTreat() {
           ))}
         </div>
       </div>
-      <div
+      <button
         className="flex h-12 justify-center items-center sticky bottom-0 text-white bg-black"
         onClick={() => {
           handleClickNext();
         }}
+        disabled={!!!orderContext.hair_treat?.length}
       >
         Next
-      </div>
+      </button>
     </div>
   );
 }

@@ -29,7 +29,6 @@ function HairStyle() {
 
   return (
     <div className="flex flex-grow flex-col">
-      <Header>Choose your hair style</Header>
       <div className="flex flex-grow flex-col">
         <SubHeader>Natural Hair Type</SubHeader>
         <div className="flex w-full justify-evenly">
@@ -131,14 +130,19 @@ function HairStyle() {
           ))}
         </div>
       </div>
-      <div
+      <button
         className="flex h-12 justify-center items-center sticky bottom-0 text-white bg-black"
         onClick={() => {
           handleClickNext();
         }}
+        disabled={
+          !orderContext.natural_hair_type ||
+          !orderContext.hair_structure ||
+          !orderContext.scalp_moisture
+        }
       >
         Next
-      </div>
+      </button>
     </div>
   );
 }

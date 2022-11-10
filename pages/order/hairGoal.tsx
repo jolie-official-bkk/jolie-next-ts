@@ -51,7 +51,6 @@ function HairGoal() {
 
   return (
     <div className="flex flex-grow flex-col">
-      <Header>Select your hair goals</Header>
       <div className="flex flex-grow flex-col">
         <SubHeader>{`choose up to ${MAXIMUM_HAIRGOAL_SELECT}`}</SubHeader>
         <div className="mb-2 grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-1">
@@ -80,14 +79,15 @@ function HairGoal() {
           ))}
         </div>
       </div>
-      <div
+      <button
         className="flex h-12 justify-center items-center sticky bottom-0 text-white bg-black"
         onClick={() => {
           handleClickNext();
         }}
+        disabled={!!!orderContext.hair_goal?.length}
       >
         Next
-      </div>
+      </button>
     </div>
   );
 }

@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Antic&display=swap");
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -7,8 +5,13 @@
 @layer base {
   body {
     /* @apply bg-[url('../public/images/marble.jpg')] bg-no-repeat bg-cover bg-center bg-fixed text-[black] font-Antic; */
-    @apply bg-[white] bg-no-repeat bg-cover bg-center bg-fixed text-[black] font-Antic;
+    @apply bg-[white] bg-no-repeat bg-cover bg-center bg-fixed text-[black];
   }
+}
+
+* {
+  font-family: "Gill Sans MT";
+  font-weight: 100;
 }
 
 /* :root {
