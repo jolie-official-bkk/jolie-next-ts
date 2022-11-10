@@ -5,8 +5,11 @@ import React, {
   FormEvent,
   Fragment,
   SetStateAction,
+  useContext,
   useState,
 } from "react";
+import { handleRegister } from "../../api/auth";
+import { UserContext } from "../../contexts/UserContext";
 import { IRegister } from "../../interfaces/user.interface";
 import Dropdown from "../inputs/Dropdown";
 import TextInput from "../inputs/TextInput";
@@ -18,13 +21,14 @@ type PropsType = {
 };
 
 function RegisterModal({ showRegisterModal, setShowRegisterModal }: PropsType) {
+  const { setIsAuthenticated } = useContext(UserContext)
   const [submission, setSubmission] = useState<IRegister>({
     first_name: "",
     last_name: "",
     email: "",
     password: "",
     confirm_password: "",
-    date_of_birth: new Date(),
+    date_of_birth: new Date(new Date().toUTCString()),
     gender: "male",
   });
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -32,21 +36,31 @@ function RegisterModal({ showRegisterModal, setShowRegisterModal }: PropsType) {
   function onSubmissionChange(event: ChangeEvent<HTMLInputElement>): void {
     setSubmission({
       ...submission,
-      [event.target.name]: event.target.value,
+      [event.target.name]: event.target.name === "date_of_birth" ? new Date(new Date(event.target.value).toUTCString()) : event.target.value,
     });
   }
 
-  async function handleRegister(
+  async function handleFormSubmit(
     event: FormEvent<HTMLFormElement>
   ): Promise<void> {
     event.preventDefault();
 
+    setIsSubmitting(true);
+    const { confirm_password, ...rest } = submission;
+    const request: IRegister = { ...rest }
+    const requestBody = JSON.stringify(request)
+
+    console.log(requestBody);
+
     try {
-      setIsSubmitting(true);
-      setTimeout(() => {
-        console.log(submission);
-        setIsSubmitting(false);
-      }, 1000);
+      await handleRegister(requestBody).then((response) => {
+        if (response && response.status == "OK") {
+          localStorage.setItem("token", response.data.token);
+          setIsAuthenticated(true);
+          setShowRegisterModal(false)
+        }
+        setIsSubmitting(false)
+      })
     } catch (error: any) {
       console.error(error.message);
     }
@@ -71,7 +85,7 @@ function RegisterModal({ showRegisterModal, setShowRegisterModal }: PropsType) {
                   onClick={() => setShowRegisterModal(false)}
                 />
               </div>
-              <form className="space-y-2" onSubmit={handleRegister}>
+              <form className="space-y-2" onSubmit={handleFormSubmit}>
                 <div className="flex">
                   <TextInput
                     label="First Name"
@@ -126,7 +140,11 @@ function RegisterModal({ showRegisterModal, setShowRegisterModal }: PropsType) {
                   type="submit"
                   className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 >
-                  {isSubmitting && <CircleSpinner />} Register
+                  {isSubmitting ?
+                    <CircleSpinner /> :
+                    <p>
+                      Register
+                    </p>}
                 </button>
               </form>
             </div>

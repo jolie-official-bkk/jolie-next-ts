@@ -1,9 +1,10 @@
 import { ChevronLeftIcon } from "@heroicons/react/outline";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { getUserInfo } from "../api/user";
 import { OrderContext } from "../contexts/OrderContext";
+import { SystemContext } from "../contexts/SystemContext";
 import { UserContext } from "../contexts/UserContext";
 import LoginModal from "./modals/LoginModal";
 import RegisterModal from "./modals/RegisterModal";
@@ -14,17 +15,32 @@ function Navbar() {
   const { user, setUser, isAuthenticated, setIsAuthenticated } =
     useContext(UserContext);
   const { currentStep } = useContext(OrderContext);
-  const [showLoginModal, setShowLoginModal] = useState<boolean>(false);
-  const [showRegisterModal, setShowRegisterModal] = useState<boolean>(false);
+  const { orderContext, setOrderContext } = useContext(OrderContext);
+  const {
+    showLoginModal,
+    setShowLoginModal,
+    showRegisterModal,
+    setShowRegisterModal,
+  } = useContext(SystemContext);
 
   useEffect(() => {
     let isSubscribed = true;
-    handleGetUserInfo().then((response) => {
+    handleGetUserInfo().then(async (response) => {
       if (isSubscribed) {
-        if (response !== undefined && user === null) {
-          console.log(response);
-
+        if (response?.status === "OK" && user === null) {
           setUser(response.data);
+          const token = localStorage.getItem("token");
+          if (user === null && token !== null) {
+            await getUserInfo(token).then((response) => {
+              if (response?.status === "OK") {
+                setUser(response.data);
+                setOrderContext({
+                  ...orderContext,
+                  user_id: response.data.user_id,
+                });
+              }
+            });
+          }
         }
       }
     });
@@ -52,6 +68,8 @@ function Navbar() {
 
   function handleLogout(): void {
     localStorage.removeItem("token");
+    setUser(null);
+    setIsAuthenticated(false);
     setIsAuthenticated(false);
   }
 

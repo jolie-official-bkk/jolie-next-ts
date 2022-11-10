@@ -32,26 +32,26 @@ function HairFormula() {
   }
 
   function checkItemClicked(item: string): boolean {
-    if (orderContext.fomular) {
-      return orderContext.fomular.includes(item);
+    if (orderContext.formula) {
+      return orderContext.formula.includes(item);
     }
 
     return false;
   }
 
   function onItemClicked(item: string): void {
-    if (orderContext.fomular) {
+    if (orderContext.formula) {
       if (checkItemClicked(item)) {
         setOrderContext({
           ...orderContext,
-          fomular: orderContext.fomular.filter(
+          formula: orderContext.formula.filter(
             (_item: string) => _item !== item
           ),
         });
-      } else if (orderContext.fomular.length < 3) {
+      } else if (orderContext.formula.length < 3) {
         setOrderContext({
           ...orderContext,
-          fomular: [...orderContext.fomular, item],
+          formula: [...orderContext.formula, item],
         });
       }
     }

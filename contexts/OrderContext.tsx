@@ -19,12 +19,13 @@ interface IOrderContext {
 
 const OrderContextState = {
   orderContext: {
+    user_id: 0,
     natural_hair_type: null,
     hair_structure: null,
     scalp_moisture: null,
     hair_treat: [],
     hair_goal: [],
-    fomular: [],
+    formula: [],
     color: null,
     scent: null,
     shampoo_name: null,

@@ -47,9 +47,10 @@ function LoginModal({
     setIsSubmitting(true);
     const requrest: ILogin = { ...submission };
     const requestBody = JSON.stringify(requrest);
+    
     try {
       await handleLogin(requestBody).then((response) => {
-        if (response) {
+        if (response && response.status === "OK") {
           localStorage.setItem("token", response.data.token);
           setIsAuthenticated(true);
           setShowLoginModal(false);

@@ -4,6 +4,7 @@ import { OrderContextProvider } from "../contexts/OrderContext";
 import { UserContextProvider } from "../contexts/UserContext";
 import Navbar from "../components/Navbar";
 import Stepper from "../components/step/Stepper";
+import { SystemContextProvider } from "../contexts/SystemContext";
 
 type ComponentWithPageLayout = AppProps & {
   Component: AppProps["Component"] & {
@@ -13,16 +14,18 @@ type ComponentWithPageLayout = AppProps & {
 
 export default function App({ Component, pageProps }: ComponentWithPageLayout) {
   return (
-    <UserContextProvider>
-      <OrderContextProvider>
-        {Component.PageLayout ? (
-          <Component.PageLayout>
+    <SystemContextProvider>
+      <UserContextProvider>
+        <OrderContextProvider>
+          {Component.PageLayout ? (
+            <Component.PageLayout>
+              <Component {...pageProps} />
+            </Component.PageLayout>
+          ) : (
             <Component {...pageProps} />
-          </Component.PageLayout>
-        ) : (
-          <Component {...pageProps} />
-        )}
-      </OrderContextProvider>
-    </UserContextProvider>
+          )}
+        </OrderContextProvider>
+      </UserContextProvider>
+    </SystemContextProvider>
   );
 }
