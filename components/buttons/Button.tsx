@@ -6,11 +6,11 @@ function Button(props: ButtonProps): ReactElement<ButtonProps> {
   const { children, ...rest } = props;
   return (
     <button
-      className="bg-primary disabled:bg-disabled text-white py-2 px-6 shadow-md shadow-black/[0.5]"
-      style={{ minWidth: 80 }}
+      className={`flex h-12 justify-center items-center sticky bottom-0 text-white`}
+      style={{ background: `${props.disabled ? "#484848" : "black"}` }}
       {...rest}
     >
-      <p className="text-md">{children}</p>
+      {children}
     </button>
   );
 }

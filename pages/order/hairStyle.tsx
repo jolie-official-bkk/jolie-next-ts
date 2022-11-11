@@ -13,6 +13,7 @@ import SubHeader from "../../components/SubHeader";
 import { OrderContext } from "../../contexts/OrderContext";
 import { FormLayout } from "../../layouts/FormLayout";
 import Header from "../../components/Header";
+import Button from "../../components/buttons/Button";
 
 function HairStyle() {
   const router = useRouter();
@@ -35,15 +36,6 @@ function HairStyle() {
           {naturalHairTypeArray.map((item: TNaturalHair, itemIndex) => (
             <div
               key={itemIndex}
-              className={
-                orderContext.natural_hair_type === item
-                  ? "border-2 border-black"
-                  : ""
-              }
-              style={{
-                cursor: "pointer",
-                boxShadow: "2px 5px 10px 1px rgba(0, 0, 0, 0.3)",
-              }}
               onClick={() => {
                 setOrderContext({
                   ...orderContext,
@@ -59,6 +51,7 @@ function HairStyle() {
                 key={itemIndex}
                 item={item}
                 imagePrefix={"hair-style"}
+                isActive={orderContext.natural_hair_type === item}
               />
             </div>
           ))}
@@ -68,15 +61,6 @@ function HairStyle() {
           {hairStructure.map((item: THairStructure, itemIndex) => (
             <div
               key={itemIndex}
-              className={
-                orderContext.hair_structure === item
-                  ? "border-2 border-black"
-                  : ""
-              }
-              style={{
-                cursor: "pointer",
-                boxShadow: "2px 5px 10px 1px rgba(0, 0, 0, 0.3)",
-              }}
               onClick={() => {
                 setOrderContext({
                   ...orderContext,
@@ -92,6 +76,7 @@ function HairStyle() {
                 key={itemIndex}
                 item={item}
                 imagePrefix={"hair-structure"}
+                isActive={orderContext.hair_structure === item}
               />
             </div>
           ))}
@@ -101,11 +86,6 @@ function HairStyle() {
           {scalpMoisture.map((item: TScalpMoisture, itemIndex) => (
             <div
               key={itemIndex}
-              className={
-                orderContext.scalp_moisture === item
-                  ? "border-2 border-black"
-                  : ""
-              }
               style={{
                 cursor: "pointer",
                 boxShadow: "2px 5px 10px 1px rgba(0, 0, 0, 0.3)",
@@ -125,13 +105,13 @@ function HairStyle() {
                 key={itemIndex}
                 item={item}
                 imagePrefix={"scalp-moisture"}
+                isActive={orderContext.scalp_moisture === item}
               />
             </div>
           ))}
         </div>
       </div>
-      <button
-        className="flex h-12 justify-center items-center sticky bottom-0 text-white bg-black"
+      <Button
         onClick={() => {
           handleClickNext();
         }}
@@ -142,7 +122,7 @@ function HairStyle() {
         }
       >
         Next
-      </button>
+      </Button>
     </div>
   );
 }

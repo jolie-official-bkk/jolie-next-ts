@@ -2,8 +2,6 @@ import { useRouter } from "next/router";
 import React, { useContext, useEffect } from "react";
 import Button from "../../components/buttons/Button";
 import ColorCard from "../../components/card/ColorCard";
-import Header from "../../components/Header";
-import Navbar from "../../components/Navbar";
 import { OrderContext } from "../../contexts/OrderContext";
 import { FormLayout } from "../../layouts/FormLayout";
 
@@ -62,15 +60,14 @@ function HairColor() {
           })}
         </div>
       </div>
-      <button
-        className="flex h-12 justify-center items-center sticky bottom-0 text-white bg-black"
+      <Button
         onClick={() => {
           handleClickNext();
         }}
         disabled={!orderContext.color}
       >
         Next
-      </button>
+      </Button>
     </div>
   );
 }

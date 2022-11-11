@@ -6,9 +6,8 @@ function Stepper({ step = 0 }: { step: number }) {
       {[1, 1, 1, 1, 1, 1, 1].map((_, itemIndex) => (
         <div
           key={itemIndex}
-          className={`w-10 h-1.5 rounded bg-${
-            step > itemIndex ? "black" : "[#d9d9d9]"
-          }`}
+          className={`w-10 h-1.5 rounded`}
+          style={{ background: `${step > itemIndex ? "black" : "[#d9d9d9]"}` }}
         />
       ))}
     </div>

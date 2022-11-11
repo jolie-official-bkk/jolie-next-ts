@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import React, { useContext, useEffect } from "react";
-import Header from "../../components/Header";
+import Button from "../../components/buttons/Button";
 import SubHeader from "../../components/SubHeader";
 import { OrderContext } from "../../contexts/OrderContext";
 import { camelCase } from "../../functions/camelCase";
@@ -64,9 +64,7 @@ function HairTreat() {
           {hairTreat.map((item: THairTreat, itemIndex) => (
             <div
               key={itemIndex}
-              className={`flex flex-grow items-center
-                ${checkItemClicked(item) ? "border-4 border-primary" : ""}
-              rounded-lg`}
+              className={`flex flex-grow items-center rounded-lg`}
               style={{
                 cursor: "pointer",
                 boxShadow: "0px 3px 5px 1px rgba(0, 0, 0, 0.3)",
@@ -87,15 +85,14 @@ function HairTreat() {
           ))}
         </div>
       </div>
-      <button
-        className="flex h-12 justify-center items-center sticky bottom-0 text-white bg-black"
+      <Button
         onClick={() => {
           handleClickNext();
         }}
         disabled={!!!orderContext.hair_treat?.length}
       >
         Next
-      </button>
+      </Button>
     </div>
   );
 }
