@@ -82,7 +82,6 @@ function LoginModal({
                 <TextInput
                   label={"Email"}
                   name={"email"}
-                  placeholder={"sun@jolie.co"}
                   type={"email"}
                   onChange={(event) => onSubmissionChange(event)}
                 />

@@ -91,21 +91,18 @@ function RegisterModal({ showRegisterModal, setShowRegisterModal }: PropsType) {
                   <TextInput
                     label="First Name"
                     name={"first_name"}
-                    placeholder={"thanat"}
                     onChange={(event) => onSubmissionChange(event)}
                   />
                   <div className="w-4" />
                   <TextInput
                     label="Last Name"
                     name={"last_name"}
-                    placeholder={"raktham"}
                     onChange={(event) => onSubmissionChange(event)}
                   />
                 </div>
                 <TextInput
                   label={"Your Email"}
                   name={"email"}
-                  placeholder={"sun@jolie.co"}
                   type={"email"}
                   onChange={(event) => onSubmissionChange(event)}
                 />
