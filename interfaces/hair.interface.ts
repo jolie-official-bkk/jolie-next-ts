@@ -1,41 +1,41 @@
-export const naturalHairTypeArray = ["straight", "wavy", "curly"];
-export const hairStructure = ["fine", "medium", "coarse"];
-export const scalpMoisture = ["dry", "balanced", "oily"];
+export const naturalHairTypeArray = ["Straight", "Wavy", "Curly"];
+export const hairStructure = ["Fine", "Medium", "Coarse"];
+export const scalpMoisture = ["Dry", "Balanced", "Oily"];
 export const hairTreat = [
-  "balayage",
-  "bleached",
-  "color",
-  "highlights",
-  "keratin",
-  "perm",
-  "relaxer",
-  "none of these",
-  "natural hair",
+  "Balayage",
+  "Bleached",
+  "Color",
+  "Highlights",
+  "Keratin",
+  "Perm",
+  "Relaxer",
+  "None of these",
+  "Natural Hair",
 ];
 export const hairGoal = [
-  "anti-dandruff",
-  "anti-frizz",
-  "color protection",
-  "fix split ends",
-  "hydrate",
-  "nourish roots",
-  "oil control",
-  "reduce brassiness",
-  "rejuvenate",
-  "shine",
-  "straighten",
-  "thermal protection",
-  "volumize",
+  "Anti-Dandruff",
+  "Anti-Frizz",
+  "Color Protection",
+  "Fix Split Ends",
+  "Hydrate",
+  "Nourish Roots",
+  "Oil Control",
+  "Reduce Brassiness",
+  "Rejuvenate",
+  "Shine",
+  "Straighten",
+  "Thermal Protection",
+  "Volumize",
 ];
 
 export const formulaName = [
-  "Clove regenerator",
-  "Lemon grass protection",
-  "Marjoram mix&match",
-  "Peppermint heat barrier",
-  "Shiny coconut oil",
-  "Super macadamia power",
-  "Yellow lemon controler",
+  "Clove Regenerator",
+  "Lemon Grass Protection",
+  "Marjoram Mix&Match",
+  "Peppermint Heat Barrier",
+  "Shiny Coconut Oil",
+  "Super Macadamia Power",
+  "Yellow Lemon Controler",
 ];
 
 // export const formulaDetail
@@ -59,11 +59,11 @@ export type THairGoal = typeof hairGoal[number];
 export type TFormulaName = typeof formulaName[number];
 export type TScent = typeof scent[number];
 
-interface IHairItem {
+interface IHairCard {
   imageUrl: string;
 }
 
-export interface INaturalHairType extends IHairItem {
+export interface INaturalHairType extends IHairCard {
   description: TNaturalHair;
 }
 

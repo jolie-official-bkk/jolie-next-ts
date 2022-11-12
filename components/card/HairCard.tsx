@@ -1,6 +1,5 @@
 import Image from "next/image";
 import React from "react";
-import { camelCase } from "../functions/camelCase";
 
 type PropsType = {
   item: string;
@@ -8,7 +7,7 @@ type PropsType = {
   isActive: boolean;
 };
 
-function HairItem({ item, imagePrefix, isActive }: PropsType) {
+function HairCard({ item, imagePrefix, isActive }: PropsType) {
   return (
     <div
       className="flex flex-col flex-grow cursor-pointer"
@@ -17,10 +16,12 @@ function HairItem({ item, imagePrefix, isActive }: PropsType) {
       }}
     >
       <Image
-        src={`/../public/images/hairStyle/${imagePrefix}-${item}.png`}
+        src={`${
+          process.env.REACT_APP_S3_PREFIX
+        }/hairStyle/${imagePrefix}-${item.toLocaleLowerCase()}.png`}
         alt={"item not found"}
         width={300}
-        height={400}
+        height={600}
       />
       <b
         className={`flex flex-col h-8 justify-center text-${
@@ -29,10 +30,10 @@ function HairItem({ item, imagePrefix, isActive }: PropsType) {
           isActive ? "black" : "white"
         }`}
       >
-        {camelCase(item)}
+        {item}
       </b>
     </div>
   );
 }
 
-export default HairItem;
+export default HairCard;

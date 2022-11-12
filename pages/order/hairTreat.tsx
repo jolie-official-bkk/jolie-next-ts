@@ -39,14 +39,14 @@ function HairTreat() {
           ),
         });
       } else {
-        if (item === "none of these" || item === "natural hair") {
+        if (item === "None of these" || item === "Natural Hair") {
           setOrderContext({ ...orderContext, hair_treat: [item] });
         } else {
           setOrderContext({
             ...orderContext,
             hair_treat: [
               ...orderContext.hair_treat.filter(
-                (_item) => !["none of these", "natural hair"].includes(_item)
+                (_item) => !["None of these", "Natural hair"].includes(_item)
               ),
               item,
             ],

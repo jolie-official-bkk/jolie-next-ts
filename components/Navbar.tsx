@@ -87,9 +87,9 @@ function Navbar() {
   return (
     <div className="sticky top-0 bg-white z-10">
       <header className="flex h-12 lg:h-20 pr-4 py-2 bg-white drop-shadow-lg shadow-black">
-        <div className="flex flex-grow">
+        <div className="flex flex-grow items-center">
           <ChevronLeftIcon
-            className={`text-${!!currentStep ? "black" : "white"}`}
+            className={`w-6 h-6 text-${!!currentStep ? "black" : "white"}`}
             onClick={() => {
               if (!!currentStep) {
                 handleGoBack();
@@ -103,16 +103,20 @@ function Navbar() {
         <div className="flex flex-grow justify-end items-center">
           {!isAuthenticated && (
             <Image
-              src={require("../public/images/user-icon.png")}
+              src={`${process.env.REACT_APP_S3_PREFIX}/user-icon.png`}
               alt={"user icon"}
               className="w-4 h-4"
+              width={16}
+              height={16}
             />
           )}
           {isAuthenticated && (
             <Image
-              src={require("../public/images/user-icon.png")}
+              src={`${process.env.REACT_APP_S3_PREFIX}/user-icon.png`}
               alt={"user icon"}
               className="w-4 h-4"
+              width={16}
+              height={16}
             />
           )}
         </div>

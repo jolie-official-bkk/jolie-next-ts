@@ -1,38 +1,34 @@
 import { useRouter } from "next/router";
 import React, { useContext, useEffect } from "react";
 import Button from "../../components/buttons/Button";
-import Header from "../../components/Header";
-import HairItem from "../../components/HairItem";
-import Navbar from "../../components/Navbar";
 import { OrderContext } from "../../contexts/OrderContext";
 import ScentCard from "../../components/card/ScentCard";
 import { FormLayout } from "../../layouts/FormLayout";
 
 const SCENT = [
   {
-    scent: "singapore",
-    location: "Gardens by the Bay",
+    scent: "Gardens by the Bay At Singapore",
     scentList: ["sea breeze", "jasmine", "hyacinth"],
   },
   {
-    scent: "korea",
-    location: "Han River In October",
+    scent: "Han River In October At Korea",
     scentList: ["hazelnut", "elemi", "pine"],
   },
   {
-    scent: "maldives",
-    location: "Maldives Sunset",
+    scent: "Maldives Sunset At Maldives",
     scentList: ["apple", "black current", "plum"],
   },
   {
-    scent: "japan",
-    location: "Shibuya Morning",
+    scent: "Shibuya Morning At Japan",
     scentList: ["tangerine", "nutmeg", "bergamot"],
   },
   {
-    scent: "thailand",
-    location: "Thonglor Night Club",
+    scent: "Thonglor Night Club At Thailand",
     scentList: ["bergamot", "lemon", "pear"],
+  },
+  {
+    scent: "Fragrance Free",
+    scentList: [],
   },
 ];
 
@@ -56,27 +52,33 @@ function HairScent() {
         <div className="px-1 py-4 grid grid-cols-2 sm:grid-cols-3 gap-1 overflow-y-auto">
           {SCENT.map((scent, scentIndex) => {
             return (
-              <div
+              <ScentCard
                 key={scentIndex}
+                isActive={orderContext.scent === scent.scent}
                 onClick={() => {
-                  setOrderContext({ ...orderContext, scent: scent.scent });
+                  setOrderContext({
+                    ...orderContext,
+                    scent: orderContext.scent
+                      ? orderContext.scent === scent.scent
+                        ? null
+                        : scent.scent
+                      : scent.scent,
+                  });
                 }}
-              >
-                <ScentCard {...scent} />
-              </div>
+                {...scent}
+              />
             );
           })}
         </div>
       </div>
-      <button
-        className="flex h-12 justify-center items-center sticky bottom-0 text-white bg-black"
+      <Button
         onClick={() => {
           handleClickNext();
         }}
         disabled={!orderContext.scent}
       >
         Next
-      </button>
+      </Button>
     </div>
   );
 }

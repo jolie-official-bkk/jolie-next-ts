@@ -3,34 +3,8 @@ import React, { useContext, useEffect } from "react";
 import Button from "../../components/buttons/Button";
 import ColorCard from "../../components/card/ColorCard";
 import { OrderContext } from "../../contexts/OrderContext";
+import { COLOR } from "../../data/color";
 import { FormLayout } from "../../layouts/FormLayout";
-
-const COLOR = [
-  {
-    hexColor: "#AEF4F9",
-    colorName: "Blue Monday",
-  },
-  {
-    hexColor: "#AEF9C3",
-    colorName: "Emerald",
-  },
-  {
-    hexColor: "#F9CAF4",
-    colorName: "Pink Skies",
-  },
-  {
-    hexColor: "#CFBAFC",
-    colorName: "Purple Rain",
-  },
-  {
-    hexColor: "#F9C0AE",
-    colorName: "Tangerine",
-  },
-  {
-    hexColor: "#DEDEDE",
-    colorName: "No Color",
-  },
-];
 
 function HairColor() {
   const router = useRouter();
@@ -62,11 +36,15 @@ function HairColor() {
             return (
               <ColorCard
                 key={colorIndex}
-                isActive={checkItemClicked(color.hexColor)}
+                isActive={checkItemClicked(color.colorName)}
                 onClick={() => {
                   setOrderContext({
                     ...orderContext,
-                    color: orderContext.color ? null : color.hexColor,
+                    color: orderContext.color
+                      ? orderContext.color === color.colorName
+                        ? null
+                        : color.colorName
+                      : color.colorName,
                   });
                 }}
                 {...color}

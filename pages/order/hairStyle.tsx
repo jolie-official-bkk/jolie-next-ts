@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import React, { useContext, useEffect } from "react";
-import HairItem from "../../components/HairItem";
+import HairCard from "../../components/card/HairCard";
 import {
   hairStructure,
   naturalHairTypeArray,
@@ -12,7 +12,6 @@ import {
 import SubHeader from "../../components/SubHeader";
 import { OrderContext } from "../../contexts/OrderContext";
 import { FormLayout } from "../../layouts/FormLayout";
-import Header from "../../components/Header";
 import Button from "../../components/buttons/Button";
 
 function HairStyle() {
@@ -47,7 +46,7 @@ function HairStyle() {
                 });
               }}
             >
-              <HairItem
+              <HairCard
                 key={itemIndex}
                 item={item}
                 imagePrefix={"hair-style"}
@@ -72,7 +71,7 @@ function HairStyle() {
                 });
               }}
             >
-              <HairItem
+              <HairCard
                 key={itemIndex}
                 item={item}
                 imagePrefix={"hair-structure"}
@@ -101,7 +100,7 @@ function HairStyle() {
                 });
               }}
             >
-              <HairItem
+              <HairCard
                 key={itemIndex}
                 item={item}
                 imagePrefix={"scalp-moisture"}

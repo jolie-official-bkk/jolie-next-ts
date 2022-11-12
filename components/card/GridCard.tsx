@@ -1,4 +1,5 @@
 import React, { MouseEventHandler } from "react";
+import { camelCase } from "../../functions/camelCase";
 import { THairGoal, THairTreat } from "../../interfaces/hair.interface";
 
 type Props = {
@@ -23,7 +24,7 @@ function GridCard({ isActive, item, onClick }: Props) {
           isActive ? "white" : "black"
         }`}
       >
-        {item}
+        {camelCase(item)}
       </b>
     </div>
   );

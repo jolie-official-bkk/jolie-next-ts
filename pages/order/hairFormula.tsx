@@ -1,34 +1,52 @@
+import { ThumbUpIcon } from "@heroicons/react/outline";
 import { useRouter } from "next/router";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Button from "../../components/buttons/Button";
 import FormulaCard from "../../components/card/FormulaCard";
 import SubHeader from "../../components/SubHeader";
 import { OrderContext } from "../../contexts/OrderContext";
-import { formulaName, TFormulaName } from "../../interfaces/hair.interface";
+import { FORMULA_DETAIL } from "../../data/formulaDetail";
+import { HAIR_GOAL_MATCH } from "../../data/hairGoalMatch";
+import {
+  formulaName,
+  TFormulaName,
+  THairGoal,
+} from "../../interfaces/hair.interface";
 import { FormLayout } from "../../layouts/FormLayout";
-
-const FORMULA_DETAIL: string[] = [
-  "Damage remedy : coconut, bran, jojoba, evening primrose",
-  "Anti-dandruff : evening primrose, sunflower seed, moringa, sweet almond",
-  "Color protection : moringa, evening primrose, rose hip, sesame",
-  "Thermal protection : coconut, avocado, macadamia, grape seed",
-  "Shine : bergamot, sesame, bran, sunflower seed",
-  "Strengthen : tea tree, moringa, jojoba, sunflower seed",
-  "Oil control : rose hip, coconut, sweet almond, grape seed",
-];
 
 function HairFormula() {
   const router = useRouter();
 
   const { orderContext, setOrderContext, setCurrentStep } =
     useContext(OrderContext);
+  const [recommendedFormulas, setRecommendedFormulas] = useState<string[]>([]);
 
   useEffect(() => {
     setCurrentStep(4);
+
+    setRecommendedFormulas(getRecommendedFormula(orderContext.hair_goal));
   }, []);
 
   function handleClickNext() {
     router.push("/order/hairColor");
+  }
+
+  function getRecommendedFormula(hair_goal: THairGoal[]) {
+    let recommendedFormula: any[] = [];
+    hair_goal.forEach((each, index) => {
+      const result = HAIR_GOAL_MATCH.get(each);
+      if (result) {
+        Array.prototype.push.apply(recommendedFormula, result);
+      }
+    });
+
+    return [...removeDuplicates(recommendedFormula)];
+  }
+
+  function removeDuplicates(arr: string[]) {
+    return arr.filter(
+      (item: string, index: number) => arr.indexOf(item) === index
+    );
   }
 
   function checkItemClicked(item: string): boolean {
@@ -59,13 +77,20 @@ function HairFormula() {
   return (
     <div className="flex flex-grow flex-col">
       <div className="flex flex-grow flex-col items-center overflow-y-auto">
-        <SubHeader>Choose up to 3</SubHeader>
+        <SubHeader>Choose 3 formulas</SubHeader>
+        <p className="flex text-black/50">
+          <ThumbUpIcon className="w-6 h-6 mr-2 mb-2 text-black/50" />
+          Recommended formulas based on your goals
+        </p>
         {formulaName.map((item: TFormulaName, itemIndex) => (
           <FormulaCard
             key={itemIndex}
             formulaName={item}
             formulaDetail={FORMULA_DETAIL[itemIndex]}
             isActive={checkItemClicked(item)}
+            isRecommended={recommendedFormulas.includes(
+              FORMULA_DETAIL[itemIndex].split(" : ")[0]
+            )}
             onClick={() => onItemClicked(item)}
           />
         ))}
@@ -74,7 +99,7 @@ function HairFormula() {
         onClick={() => {
           handleClickNext();
         }}
-        disabled={!!!orderContext.formula?.length}
+        disabled={orderContext.formula?.length !== 3}
       >
         Next
       </Button>

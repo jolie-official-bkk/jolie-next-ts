@@ -2,8 +2,6 @@ import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import { OrderContextProvider } from "../contexts/OrderContext";
 import { UserContextProvider } from "../contexts/UserContext";
-import Navbar from "../components/Navbar";
-import Stepper from "../components/step/Stepper";
 import { SystemContextProvider } from "../contexts/SystemContext";
 
 type ComponentWithPageLayout = AppProps & {
