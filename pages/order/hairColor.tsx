@@ -26,6 +26,10 @@ const COLOR = [
     hexColor: "#F9C0AE",
     colorName: "Tangerine",
   },
+  {
+    hexColor: "#DEDEDE",
+    colorName: "No Color",
+  },
 ];
 
 function HairColor() {
@@ -42,20 +46,31 @@ function HairColor() {
     router.push("/order/hairScent");
   }
 
+  function checkItemClicked(item: string): boolean {
+    if (orderContext.color) {
+      return orderContext.color === item;
+    }
+
+    return false;
+  }
+
   return (
     <div className="flex flex-grow flex-col">
       <div className="flex flex-grow flex-col">
         <div className="px-1 py-4 grid grid-cols-2 sm:grid-cols-3 gap-1 overflow-y-auto">
           {COLOR.map((color, colorIndex) => {
             return (
-              <div
+              <ColorCard
                 key={colorIndex}
+                isActive={checkItemClicked(color.hexColor)}
                 onClick={() => {
-                  setOrderContext({ ...orderContext, color: color.hexColor });
+                  setOrderContext({
+                    ...orderContext,
+                    color: orderContext.color ? null : color.hexColor,
+                  });
                 }}
-              >
-                <ColorCard {...color} />
-              </div>
+                {...color}
+              />
             );
           })}
         </div>

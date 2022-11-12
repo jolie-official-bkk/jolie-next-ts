@@ -7,7 +7,7 @@ function Stepper({ step = 0 }: { step: number }) {
         <div
           key={itemIndex}
           className={`w-10 h-1.5 rounded`}
-          style={{ background: `${step > itemIndex ? "black" : "[#d9d9d9]"}` }}
+          style={{ background: `${step > itemIndex ? "black" : "#d9d9d9"}` }}
         />
       ))}
     </div>

@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import React, { useContext, useEffect } from "react";
+import Button from "../../components/buttons/Button";
 import FormulaCard from "../../components/card/FormulaCard";
-import Header from "../../components/Header";
 import SubHeader from "../../components/SubHeader";
 import { OrderContext } from "../../contexts/OrderContext";
 import { formulaName, TFormulaName } from "../../interfaces/hair.interface";
@@ -61,24 +61,23 @@ function HairFormula() {
       <div className="flex flex-grow flex-col items-center overflow-y-auto">
         <SubHeader>Choose up to 3</SubHeader>
         {formulaName.map((item: TFormulaName, itemIndex) => (
-          <div onClick={() => onItemClicked(item)}>
-            <FormulaCard
-              key={itemIndex}
-              formulaName={item}
-              formulaDetail={FORMULA_DETAIL[itemIndex]}
-            />
-          </div>
+          <FormulaCard
+            key={itemIndex}
+            formulaName={item}
+            formulaDetail={FORMULA_DETAIL[itemIndex]}
+            isActive={checkItemClicked(item)}
+            onClick={() => onItemClicked(item)}
+          />
         ))}
       </div>
-      <button
-        className="flex h-12 justify-center items-center sticky bottom-0 text-white bg-black"
+      <Button
         onClick={() => {
           handleClickNext();
         }}
         disabled={!!!orderContext.formula?.length}
       >
         Next
-      </button>
+      </Button>
     </div>
   );
 }

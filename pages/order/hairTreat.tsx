@@ -1,9 +1,9 @@
 import { useRouter } from "next/router";
 import React, { useContext, useEffect } from "react";
 import Button from "../../components/buttons/Button";
+import GridCard from "../../components/card/GridCard";
 import SubHeader from "../../components/SubHeader";
 import { OrderContext } from "../../contexts/OrderContext";
-import { camelCase } from "../../functions/camelCase";
 import { hairTreat, THairTreat } from "../../interfaces/hair.interface";
 import { FormLayout } from "../../layouts/FormLayout";
 
@@ -60,28 +60,16 @@ function HairTreat() {
     <div className="flex flex-grow flex-col">
       <div className="flex flex-grow flex-col">
         <SubHeader>Select all that apply</SubHeader>
-        <div className="mb-2 grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-1">
+        <div className="px-1 mb-2 grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-1">
           {hairTreat.map((item: THairTreat, itemIndex) => (
-            <div
+            <GridCard
               key={itemIndex}
-              className={`flex flex-grow items-center rounded-lg`}
-              style={{
-                cursor: "pointer",
-                boxShadow: "0px 3px 5px 1px rgba(0, 0, 0, 0.3)",
-                // background: "red",
-              }}
               onClick={() => {
                 onItemClicked(item);
               }}
-            >
-              <b
-                className={`flex items-center text-lg lg:text-2xl text-center py-${
-                  checkItemClicked(item) ? "1" : "2"
-                } mx-auto`}
-              >
-                {camelCase(item)}
-              </b>
-            </div>
+              isActive={checkItemClicked(item)}
+              item={item}
+            />
           ))}
         </div>
       </div>
