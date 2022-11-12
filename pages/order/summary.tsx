@@ -13,8 +13,8 @@ import { placeOrder } from "../../api/order";
 function Summary() {
   const router = useRouter();
 
-  const { setShowLoginModal } = useContext(SystemContext)
-  const { isAuthenticated } = useContext(UserContext)
+  const { setShowLoginModal } = useContext(SystemContext);
+  const { isAuthenticated } = useContext(UserContext);
   const { orderContext, setOrderContext } = useContext(OrderContext);
 
   function onChange(event: ChangeEvent<HTMLInputElement>): void {
@@ -24,7 +24,9 @@ function Summary() {
     });
   }
 
-  async function handleSubmitOrder(event: FormEvent<HTMLFormElement>): Promise<void> {
+  async function handleSubmitOrder(
+    event: FormEvent<HTMLFormElement>
+  ): Promise<void> {
     event.preventDefault();
 
     if (isAuthenticated) {
@@ -37,13 +39,12 @@ function Summary() {
           // if (response?.status == "OK") {
 
           // }
-        })
+        });
       } catch (error: any) {
         console.error(error.message);
       }
-
     } else {
-      setShowLoginModal(true)
+      setShowLoginModal(true);
     }
   }
 
@@ -66,8 +67,7 @@ function Summary() {
                 );
           })}
         </div>
-        <form onSubmit={
-          handleSubmitOrder}>
+        <form onSubmit={handleSubmitOrder}>
           <Header>Name Your Bottle</Header>
           <input
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg my-5 focus:ring-blue-500 focus:border-blue-500 block p-2.5"
@@ -76,13 +76,10 @@ function Summary() {
             required
           />
           <div className="flex justify-center">
-            <Button
-              type="submit"
-            >
+            <Button type="submit">
               <b>Order!</b>
             </Button>
           </div>
-
         </form>
       </div>
     </div>

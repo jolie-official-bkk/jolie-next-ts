@@ -20,8 +20,8 @@ function HairCard({ item, imagePrefix, isActive }: PropsType) {
           process.env.REACT_APP_S3_PREFIX
         }/hairStyle/${imagePrefix}-${item.toLocaleLowerCase()}.png`}
         alt={"item not found"}
-        width={300}
-        height={600}
+        width={125}
+        height={125}
       />
       <b
         className={`flex flex-col h-8 justify-center text-${

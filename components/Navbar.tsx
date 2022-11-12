@@ -86,10 +86,10 @@ function Navbar() {
 
   return (
     <div className="sticky top-0 bg-white z-10">
-      <header className="flex h-12 lg:h-20 pr-4 py-2 bg-white drop-shadow-lg shadow-black">
+      <header className="flex h-12 lg:h-20 px-2 py-2 bg-white drop-shadow-lg shadow-black">
         <div className="flex flex-grow items-center">
           <ChevronLeftIcon
-            className={`w-6 h-6 text-${!!currentStep ? "black" : "white"}`}
+            className={`w-8 h-8 text-${!!currentStep ? "black" : "white"}`}
             onClick={() => {
               if (!!currentStep) {
                 handleGoBack();
@@ -105,19 +105,22 @@ function Navbar() {
             <Image
               src={`${process.env.REACT_APP_S3_PREFIX}/user-icon.png`}
               alt={"user icon"}
-              className="w-4 h-4"
-              width={16}
-              height={16}
+              className="w-8 h-8 p-1.5"
+              width={32}
+              height={32}
+              onClick={() => {
+                setShowLoginModal(true);
+              }}
             />
           )}
           {isAuthenticated && (
-            <Image
-              src={`${process.env.REACT_APP_S3_PREFIX}/user-icon.png`}
-              alt={"user icon"}
-              className="w-4 h-4"
-              width={16}
-              height={16}
-            />
+            <span
+              className="flex w-8 h-8 justify-center items-center font-medium text-white rounded-full bg-black"
+              onClick={() => handleLogout()}
+            >
+              {user?.first_name.charAt(0).toLocaleUpperCase()}
+              {user?.last_name.charAt(0).toLocaleUpperCase()}
+            </span>
           )}
         </div>
       </header>

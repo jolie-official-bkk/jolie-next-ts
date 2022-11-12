@@ -19,28 +19,28 @@ function Dropdown({ label, submission, setSubmission, value }: PropsType) {
     <div className="w-full">
       <label
         htmlFor="email"
-        className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+        className="block mb-2 text-sm font-medium text-black"
       >
         {label}
       </label>
       <div
         id="dropdownInformationButton"
-        className="flex justify-between items-center bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+        className="flex justify-between items-center bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5 text-black"
         onClick={() => {
           setShowDrowDown((prev) => !prev);
         }}
       >
         {value}
         {showDrowDown && (
-          <ChevronUpIcon className="h-4 text-white cursor-pointer" />
+          <ChevronUpIcon className="h-4 text-black cursor-pointer" />
         )}
         {!showDrowDown && (
-          <ChevronDownIcon className="h-4 text-white cursor-pointer" />
+          <ChevronDownIcon className="h-4 text-black cursor-pointer" />
         )}
       </div>
 
       {showDrowDown && (
-        <ul className="w-32 py-1 text-sm text-gray-700 dark:text-gray-200 z-10 bg-white absolute rounded shadow dark:bg-gray-700">
+        <ul className="w-32 py-1 text-smtext-black z-10 bg-white absolute rounded shadow">
           {genderTypeArray.map((gender, genderIndex) => (
             <li
               key={genderIndex}

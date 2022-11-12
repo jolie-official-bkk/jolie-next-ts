@@ -80,6 +80,7 @@ export default function Home() {
           alt={"all bottle"}
           width={600}
           height={400}
+          priority
         />
       </div>
     </Fragment>

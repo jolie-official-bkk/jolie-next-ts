@@ -1,5 +1,12 @@
 import Image from "next/image";
-import React, { ChangeEvent, useContext, useEffect } from "react";
+import React, {
+  ChangeEvent,
+  FormEvent,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+import { placeOrder } from "../../api/order";
 import Button from "../../components/buttons/Button";
 import SummaryCard from "../../components/card/SummaryCard";
 import { OrderContext } from "../../contexts/OrderContext";
@@ -8,17 +15,26 @@ import { FormLayout } from "../../layouts/FormLayout";
 function OrderShampoo() {
   const { orderContext, setOrderContext, setCurrentStep } =
     useContext(OrderContext);
+  const [buttonText, setButtonText] = useState<string>("Order!");
 
   useEffect(() => {
     setCurrentStep(7);
   }, []);
 
   async function handleSubmitOrder(): Promise<void> {
-    try {
-      console.log(orderContext);
-    } catch (error: any) {
-      console.error(error.message);
-    }
+    const requestBody = JSON.stringify(orderContext);
+    console.log(requestBody);
+
+    await placeOrder(requestBody)
+      .then(() => {
+        setButtonText("Done!");
+        setTimeout(() => {
+          setButtonText("Order!");
+        }, 2000);
+      })
+      .catch((error: any) => {
+        console.error(error.message);
+      });
   }
 
   function onChange(event: ChangeEvent<HTMLInputElement>): void {
@@ -37,6 +53,7 @@ function OrderShampoo() {
           className="object-contain w-5/12 scale-150"
           width={300}
           height={400}
+          priority
         />
         <div className="flex flex-grow max-h-80 flex-col pr-5">
           <SummaryCard />
@@ -48,7 +65,7 @@ function OrderShampoo() {
       >
         <header className="text-lg">Name Your Bottle!</header>
         <input
-          className="bg-gray-50 text-gray-900 text-sm text-center rounded-lg my-5 focus:ring-blue-500 focus:border-blue-500 block p-2.5 shadow-md shadow-black/40"
+          className="bg-gray-50 text-black text-sm text-center rounded-lg my-5 focus:ring-blue-500 focus:border-blue-500 block p-2.5 shadow-md shadow-black/40"
           name="shampoo_name"
           placeholder="Your Name"
           onChange={onChange}
@@ -62,7 +79,7 @@ function OrderShampoo() {
         }}
         disabled={!orderContext.shampoo_name}
       >
-        Order!
+        {buttonText}
       </Button>
     </div>
   );

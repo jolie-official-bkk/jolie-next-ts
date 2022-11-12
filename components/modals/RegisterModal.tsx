@@ -21,7 +21,7 @@ type PropsType = {
 };
 
 function RegisterModal({ showRegisterModal, setShowRegisterModal }: PropsType) {
-  const { setIsAuthenticated } = useContext(UserContext)
+  const { setIsAuthenticated } = useContext(UserContext);
   const [submission, setSubmission] = useState<IRegister>({
     first_name: "",
     last_name: "",
@@ -36,7 +36,10 @@ function RegisterModal({ showRegisterModal, setShowRegisterModal }: PropsType) {
   function onSubmissionChange(event: ChangeEvent<HTMLInputElement>): void {
     setSubmission({
       ...submission,
-      [event.target.name]: event.target.name === "date_of_birth" ? new Date(new Date(event.target.value).toUTCString()) : event.target.value,
+      [event.target.name]:
+        event.target.name === "date_of_birth"
+          ? new Date(new Date(event.target.value).toUTCString())
+          : event.target.value,
     });
   }
 
@@ -47,8 +50,8 @@ function RegisterModal({ showRegisterModal, setShowRegisterModal }: PropsType) {
 
     setIsSubmitting(true);
     const { confirm_password, ...rest } = submission;
-    const request: IRegister = { ...rest }
-    const requestBody = JSON.stringify(request)
+    const request: IRegister = { ...rest };
+    const requestBody = JSON.stringify(request);
 
     console.log(requestBody);
 
@@ -57,10 +60,10 @@ function RegisterModal({ showRegisterModal, setShowRegisterModal }: PropsType) {
         if (response && response.status == "OK") {
           localStorage.setItem("token", response.data.token);
           setIsAuthenticated(true);
-          setShowRegisterModal(false)
+          setShowRegisterModal(false);
         }
-        setIsSubmitting(false)
-      })
+        setIsSubmitting(false);
+      });
     } catch (error: any) {
       console.error(error.message);
     }
@@ -74,14 +77,12 @@ function RegisterModal({ showRegisterModal, setShowRegisterModal }: PropsType) {
         className="overflow-y-auto overflow-x-hidden flex flex-col items-center absolute top-0 z-50 w-full h-screen bg-opacity-30 bg-black"
       >
         <div className="relative flex flex-col justify-center p-4 w-full max-w-md h-full">
-          <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
+          <div className="relative bg-white rounded-lg shadow">
             <div className="py-5 px-5 lg:px-8">
               <div className="flex h-12 justify-between">
-                <h3 className="text-xl font-medium text-gray-900 dark:text-white">
-                  Sign up
-                </h3>
+                <h3 className="text-xl font-medium text-black">Sign up</h3>
                 <XIcon
-                  className="h-6 text-white cursor-pointer"
+                  className="h-6 text-blackcursor-pointer"
                   onClick={() => setShowRegisterModal(false)}
                 />
               </div>
@@ -138,13 +139,9 @@ function RegisterModal({ showRegisterModal, setShowRegisterModal }: PropsType) {
 
                 <button
                   type="submit"
-                  className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                  className="w-full text-white bg-black hover:bg-black/80 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                 >
-                  {isSubmitting ?
-                    <CircleSpinner /> :
-                    <p>
-                      Register
-                    </p>}
+                  {isSubmitting ? <CircleSpinner /> : <p>Register</p>}
                 </button>
               </form>
             </div>

@@ -47,7 +47,7 @@ function LoginModal({
     setIsSubmitting(true);
     const requrest: ILogin = { ...submission };
     const requestBody = JSON.stringify(requrest);
-    
+
     try {
       await handleLogin(requestBody).then((response) => {
         if (response && response.status === "OK") {
@@ -69,27 +69,25 @@ function LoginModal({
         className="overflow-y-auto overflow-x-hidden flex flex-col items-center absolute top-0 z-50 w-full h-screen bg-opacity-30 bg-black"
       >
         <div className="relative flex flex-col justify-center p-4 w-full max-w-md h-full">
-          <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
+          <div className="relative bg-white rounded-lg shadow">
             <div className="py-5 px-5 lg:px-8">
               <div className="flex h-12 justify-between">
-                <h3 className="text-xl font-medium text-gray-900 dark:text-white">
-                  Sign in
-                </h3>
+                <h3 className="text-xl font-medium text-black">Sign in</h3>
                 <XIcon
-                  className="h-6 text-white cursor-pointer"
+                  className="h-6 text-blackcursor-pointer"
                   onClick={() => setShowLoginModal(false)}
                 />
               </div>
               <form className="space-y-2" onSubmit={handleFormSubmit}>
                 <TextInput
-                  label={"Your Email"}
+                  label={"Email"}
                   name={"email"}
                   placeholder={"sun@jolie.co"}
                   type={"email"}
                   onChange={(event) => onSubmissionChange(event)}
                 />
                 <TextInput
-                  label={"Your password"}
+                  label={"password"}
                   name={"password"}
                   type={"password"}
                   onChange={(event) => onSubmissionChange(event)}
@@ -97,14 +95,14 @@ function LoginModal({
                 <div className="py-2">
                   <button
                     type="submit"
-                    className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    className="w-full text-white bg-black hover:bg-black/80 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                   >
                     {isSubmitting && <CircleSpinner />}
                     {!isSubmitting && <p>{"Login"}</p>}
                   </button>
                 </div>
               </form>
-              <div className="flex text-sm font-medium text-gray-500 dark:text-gray-300">
+              <div className="flex text-sm font-medium text-gray-500text-black">
                 Not registered?
                 <p
                   className="text-blue-700 ml-2 hover:underline dark:text-blue-500"
