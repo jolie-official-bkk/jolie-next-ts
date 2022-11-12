@@ -1,15 +1,16 @@
 import { useRouter } from "next/router";
-import React, { useContext, useEffect } from "react";
+import React, { ReactElement, useContext, useEffect } from "react";
 import Button from "../../components/buttons/Button";
 import GridCard from "../../components/card/GridCard";
 import SubHeader from "../../components/SubHeader";
 import { OrderContext } from "../../contexts/OrderContext";
 import { hairGoal } from "../../interfaces/hair.interface";
 import { FormLayout } from "../../layouts/FormLayout";
+import type { NextPageWithLayout } from "../_app";
 
 const MAXIMUM_HAIRGOAL_SELECT = 5;
 
-function HairGoal() {
+const HairGoal: NextPageWithLayout = () => {
   const router = useRouter();
 
   const { orderContext, setOrderContext, setCurrentStep } =
@@ -76,8 +77,10 @@ function HairGoal() {
       </Button>
     </div>
   );
-}
+};
 
-HairGoal.PageLayout = FormLayout;
+HairGoal.getLayout = function getLayout(page: ReactElement) {
+  return <FormLayout>{page}</FormLayout>;
+};
 
 export default HairGoal;

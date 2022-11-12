@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React, { useContext, useEffect } from "react";
+import React, { ReactElement, useContext, useEffect } from "react";
 import HairCard from "../../components/card/HairCard";
 import {
   hairStructure,
@@ -13,8 +13,9 @@ import SubHeader from "../../components/SubHeader";
 import { OrderContext } from "../../contexts/OrderContext";
 import { FormLayout } from "../../layouts/FormLayout";
 import Button from "../../components/buttons/Button";
+import type { NextPageWithLayout } from "../_app";
 
-function HairStyle() {
+const HairStyle: NextPageWithLayout = () => {
   const router = useRouter();
   const { orderContext, setOrderContext, setCurrentStep } =
     useContext(OrderContext);
@@ -124,8 +125,10 @@ function HairStyle() {
       </Button>
     </div>
   );
-}
+};
 
-HairStyle.PageLayout = FormLayout;
+HairStyle.getLayout = function getLayout(page: ReactElement) {
+  return <FormLayout>{page}</FormLayout>;
+};
 
 export default HairStyle;

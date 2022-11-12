@@ -1,27 +1,26 @@
 import "../styles/globals.css";
+import { ReactElement, ReactNode } from "react";
 import type { AppProps } from "next/app";
+import type { NextPage } from "next";
 import { OrderContextProvider } from "../contexts/OrderContext";
 import { UserContextProvider } from "../contexts/UserContext";
 import { SystemContextProvider } from "../contexts/SystemContext";
 
-type ComponentWithPageLayout = AppProps & {
-  Component: AppProps["Component"] & {
-    PageLayout?: React.ComponentType;
-  };
+export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
+  getLayout?: (page: ReactElement) => ReactNode;
 };
 
-export default function App({ Component, pageProps }: ComponentWithPageLayout) {
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout;
+};
+
+export default function App({ Component, pageProps }: AppPropsWithLayout) {
+  const getLayout = Component.getLayout ?? ((page) => page);
   return (
     <SystemContextProvider>
       <UserContextProvider>
         <OrderContextProvider>
-          {Component.PageLayout ? (
-            <Component.PageLayout>
-              <Component {...pageProps} />
-            </Component.PageLayout>
-          ) : (
-            <Component {...pageProps} />
-          )}
+          {getLayout(<Component {...pageProps} />)}
         </OrderContextProvider>
       </UserContextProvider>
     </SystemContextProvider>

@@ -1,12 +1,13 @@
 import { useRouter } from "next/router";
-import React, { useContext, useEffect } from "react";
+import React, { ReactElement, useContext, useEffect } from "react";
 import Button from "../../components/buttons/Button";
 import ColorCard from "../../components/card/ColorCard";
 import { OrderContext } from "../../contexts/OrderContext";
 import { COLOR } from "../../data/color";
 import { FormLayout } from "../../layouts/FormLayout";
+import { NextPageWithLayout } from "../_app";
 
-function HairColor() {
+const HairColor: NextPageWithLayout = () => {
   const router = useRouter();
 
   const { orderContext, setOrderContext, setCurrentStep } =
@@ -63,8 +64,10 @@ function HairColor() {
       </Button>
     </div>
   );
-}
+};
 
-HairColor.PageLayout = FormLayout;
+HairColor.getLayout = function getLayout(page: ReactElement) {
+  return <FormLayout>{page}</FormLayout>;
+};
 
 export default HairColor;

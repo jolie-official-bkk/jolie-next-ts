@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React, {
   ChangeEvent,
-  FormEvent,
+  ReactElement,
   useContext,
   useEffect,
   useState,
@@ -11,8 +11,9 @@ import Button from "../../components/buttons/Button";
 import SummaryCard from "../../components/card/SummaryCard";
 import { OrderContext } from "../../contexts/OrderContext";
 import { FormLayout } from "../../layouts/FormLayout";
+import type { NextPageWithLayout } from "../_app";
 
-function OrderShampoo() {
+const OrderShampoo: NextPageWithLayout = () => {
   const { orderContext, setOrderContext, setCurrentStep } =
     useContext(OrderContext);
   const [buttonText, setButtonText] = useState<string>("Order!");
@@ -83,8 +84,10 @@ function OrderShampoo() {
       </Button>
     </div>
   );
-}
+};
 
-OrderShampoo.PageLayout = FormLayout;
+OrderShampoo.getLayout = function getLayout(page: ReactElement) {
+  return <FormLayout>{page}</FormLayout>;
+};
 
 export default OrderShampoo;

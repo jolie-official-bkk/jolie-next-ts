@@ -1,6 +1,6 @@
 import { ThumbUpIcon } from "@heroicons/react/outline";
 import { useRouter } from "next/router";
-import React, { useContext, useEffect, useState } from "react";
+import React, { ReactElement, useContext, useEffect, useState } from "react";
 import Button from "../../components/buttons/Button";
 import FormulaCard from "../../components/card/FormulaCard";
 import SubHeader from "../../components/SubHeader";
@@ -13,8 +13,9 @@ import {
   THairGoal,
 } from "../../interfaces/hair.interface";
 import { FormLayout } from "../../layouts/FormLayout";
+import { NextPageWithLayout } from "../_app";
 
-function HairFormula() {
+const HairFormula: NextPageWithLayout = () => {
   const router = useRouter();
 
   const { orderContext, setOrderContext, setCurrentStep } =
@@ -105,8 +106,10 @@ function HairFormula() {
       </Button>
     </div>
   );
-}
+};
 
-HairFormula.PageLayout = FormLayout;
+HairFormula.getLayout = function getLayout(page: ReactElement) {
+  return <FormLayout>{page}</FormLayout>;
+};
 
 export default HairFormula;

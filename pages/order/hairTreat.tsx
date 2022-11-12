@@ -1,13 +1,14 @@
 import { useRouter } from "next/router";
-import React, { useContext, useEffect } from "react";
+import React, { ReactElement, useContext, useEffect } from "react";
 import Button from "../../components/buttons/Button";
 import GridCard from "../../components/card/GridCard";
 import SubHeader from "../../components/SubHeader";
 import { OrderContext } from "../../contexts/OrderContext";
 import { hairTreat, THairTreat } from "../../interfaces/hair.interface";
 import { FormLayout } from "../../layouts/FormLayout";
+import type { NextPageWithLayout } from "../_app";
 
-function HairTreat() {
+const HairTreat: NextPageWithLayout = () => {
   const router = useRouter();
 
   const { orderContext, setOrderContext, setCurrentStep } =
@@ -83,8 +84,10 @@ function HairTreat() {
       </Button>
     </div>
   );
-}
+};
 
-HairTreat.PageLayout = FormLayout;
+HairTreat.getLayout = function getLayout(page: ReactElement) {
+  return <FormLayout>{page}</FormLayout>;
+};
 
 export default HairTreat;

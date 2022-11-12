@@ -1,15 +1,16 @@
 import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { Fragment, useContext, useEffect } from "react";
+import { Fragment, ReactElement, useContext, useEffect } from "react";
 import { handleValidateToken } from "../api/auth";
 import { getUserInfo } from "../api/user";
 import Logo from "../components/Logo";
 import { OrderContext } from "../contexts/OrderContext";
 import { UserContext } from "../contexts/UserContext";
 import { FormLayout } from "../layouts/FormLayout";
+import type { NextPageWithLayout } from "./_app";
 
-export default function Home() {
+const Home: NextPageWithLayout = () => {
   const router = useRouter();
   const { user, setUser, setIsAuthenticated } = useContext(UserContext);
   const { orderContext, setOrderContext, setCurrentStep } =
@@ -85,6 +86,10 @@ export default function Home() {
       </div>
     </Fragment>
   );
-}
+};
 
-Home.PageLayout = FormLayout;
+Home.getLayout = function getLayout(page: ReactElement) {
+  return <FormLayout>{page}</FormLayout>;
+};
+
+export default Home;

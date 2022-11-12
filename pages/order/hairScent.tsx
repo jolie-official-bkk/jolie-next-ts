@@ -1,9 +1,10 @@
 import { useRouter } from "next/router";
-import React, { useContext, useEffect } from "react";
+import React, { ReactElement, useContext, useEffect } from "react";
 import Button from "../../components/buttons/Button";
 import { OrderContext } from "../../contexts/OrderContext";
 import ScentCard from "../../components/card/ScentCard";
 import { FormLayout } from "../../layouts/FormLayout";
+import type { NextPageWithLayout } from "../_app";
 
 const SCENT = [
   {
@@ -32,7 +33,7 @@ const SCENT = [
   },
 ];
 
-function HairScent() {
+const HairScent: NextPageWithLayout = () => {
   const router = useRouter();
 
   const { orderContext, setOrderContext, setCurrentStep } =
@@ -81,8 +82,10 @@ function HairScent() {
       </Button>
     </div>
   );
-}
+};
 
-HairScent.PageLayout = FormLayout;
+HairScent.getLayout = function getLayout(page: ReactElement) {
+  return <FormLayout>{page}</FormLayout>;
+};
 
 export default HairScent;
