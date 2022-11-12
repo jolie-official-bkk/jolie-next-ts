@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { useRouter } from "next/router";
 import React, {
   ChangeEvent,
   ReactElement,
@@ -14,6 +15,7 @@ import { FormLayout } from "../../layouts/FormLayout";
 import type { NextPageWithLayout } from "../_app";
 
 const OrderShampoo: NextPageWithLayout = () => {
+  const router = useRouter();
   const { orderContext, setOrderContext, setCurrentStep } =
     useContext(OrderContext);
   const [buttonText, setButtonText] = useState<string>("Order!");
@@ -30,7 +32,7 @@ const OrderShampoo: NextPageWithLayout = () => {
       .then(() => {
         setButtonText("Done!");
         setTimeout(() => {
-          setButtonText("Order!");
+          router.push("/");
         }, 2000);
       })
       .catch((error: any) => {
