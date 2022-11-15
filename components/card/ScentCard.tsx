@@ -11,7 +11,7 @@ interface IScentCard {
 function ScentCard({ scent, isActive, onClick, scentList }: IScentCard) {
   return (
     <div
-      className={`flex flex-col flex-grow items-center bg-${
+      className={`flex flex-col flex-grow max-w-[200px] mx-auto items-center bg-${
         isActive ? "black" : "white"
       } rounded-xl`}
       style={{ boxShadow: "0 0 5px 2px rgba(0, 0, 0, 0.3)" }}
@@ -26,9 +26,9 @@ function ScentCard({ scent, isActive, onClick, scentList }: IScentCard) {
         priority
       />
       <b
-        className={`py-${!!scentList.length ? 0 : 2} text-xs text-${
+        className={`py-${!!scentList.length ? 0 : 2} text-[11px] text-${
           isActive ? "white" : "black"
-        }`}
+        } pt-1`}
       >{`${scent}`}</b>
       {!!scentList.length && (
         <p

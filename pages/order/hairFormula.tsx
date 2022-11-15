@@ -5,6 +5,7 @@ import Button from "../../components/buttons/Button";
 import FormulaCard from "../../components/card/FormulaCard";
 import SubHeader from "../../components/SubHeader";
 import { OrderContext } from "../../contexts/OrderContext";
+import { FormulaData, IFormulaData } from "../../data/formulaData";
 import { FORMULA_DETAIL } from "../../data/formulaDetail";
 import { HAIR_GOAL_MATCH } from "../../data/hairGoalMatch";
 import {
@@ -75,6 +76,9 @@ const HairFormula: NextPageWithLayout = () => {
       }
     }
   }
+
+  console.log(recommendedFormulas);
+
   return (
     <div className="flex flex-grow flex-col">
       <div className="flex flex-grow flex-col items-center overflow-y-auto">
@@ -83,16 +87,16 @@ const HairFormula: NextPageWithLayout = () => {
           <ThumbUpIcon className="w-6 h-6 mr-2 mb-2 text-black/50" />
           Recommended formulas based on your goals
         </p>
-        {formulaName.map((item: TFormulaName, itemIndex) => (
+        {FormulaData.map((formula: IFormulaData, formulaIndex) => (
           <FormulaCard
-            key={itemIndex}
-            formulaName={item}
-            formulaDetail={FORMULA_DETAIL[itemIndex]}
-            isActive={checkItemClicked(item)}
-            isRecommended={recommendedFormulas.includes(
-              FORMULA_DETAIL[itemIndex].split(" : ")[0]
-            )}
-            onClick={() => onItemClicked(item)}
+            key={formulaIndex}
+            formulaName={formula.formulaName}
+            formulaDetail={`${formula.property} : ${formula.ingredients.join(
+              ", "
+            )}`}
+            isActive={checkItemClicked(formula.formulaName)}
+            isRecommended={recommendedFormulas.includes(formula.property)}
+            onClick={() => onItemClicked(formula.formulaName)}
           />
         ))}
       </div>

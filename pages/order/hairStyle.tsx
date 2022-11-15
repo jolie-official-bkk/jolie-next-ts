@@ -35,7 +35,7 @@ const HairStyle: NextPageWithLayout = () => {
   return (
     <div className="flex flex-grow flex-col">
       <div className="flex flex-grow flex-col">
-        <SubHeader>{"test"}</SubHeader>
+        <SubHeader>{t("hairStyle.naturalHairType.title")}</SubHeader>
         <div className="flex w-full justify-evenly">
           {naturalHairTypeArray.map((item: TNaturalHair, itemIndex) => (
             <div
@@ -56,11 +56,14 @@ const HairStyle: NextPageWithLayout = () => {
                 item={item}
                 imagePrefix={"hair-style"}
                 isActive={orderContext.natural_hair_type === item}
+                displayText={t(
+                  `hairStyle.naturalHairType.${item.toLocaleLowerCase()}`
+                )}
               />
             </div>
           ))}
         </div>
-        <SubHeader>Hair Structure</SubHeader>
+        <SubHeader>{t("hairStyle.hairStructure.title")}</SubHeader>
         <div className="flex w-full justify-evenly">
           {hairStructure.map((item: THairStructure, itemIndex) => (
             <div
@@ -81,11 +84,14 @@ const HairStyle: NextPageWithLayout = () => {
                 item={item}
                 imagePrefix={"hair-structure"}
                 isActive={orderContext.hair_structure === item}
+                displayText={t(
+                  `hairStyle.hairStructure.${item.toLocaleLowerCase()}`
+                )}
               />
             </div>
           ))}
         </div>
-        <SubHeader>Scalp Moisture</SubHeader>
+        <SubHeader>{t("hairStyle.scalpMoisture.title")}</SubHeader>
         <div className="flex justify-evenly pb-4">
           {scalpMoisture.map((item: TScalpMoisture, itemIndex) => (
             <div
@@ -110,6 +116,9 @@ const HairStyle: NextPageWithLayout = () => {
                 item={item}
                 imagePrefix={"scalp-moisture"}
                 isActive={orderContext.scalp_moisture === item}
+                displayText={t(
+                  `hairStyle.scalpMoisture.${item.toLocaleLowerCase()}`
+                )}
               />
             </div>
           ))}

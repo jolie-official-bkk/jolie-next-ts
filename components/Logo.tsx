@@ -18,7 +18,7 @@ function Logo() {
           className="relative bottom-2 text-black/60"
           style={{ fontSize: "1.2rem" }}
         >
-          avac amour et passion
+          avec amour et passion
         </div>
       </div>
     </div>

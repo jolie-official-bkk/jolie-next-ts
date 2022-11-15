@@ -2,7 +2,7 @@ import { ChevronLeftIcon } from "@heroicons/react/outline";
 import { useTranslation } from "next-i18next";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useContext, useEffect, useState } from "react";
+import { ChangeEvent, useContext, useEffect, useState } from "react";
 import { getUserInfo } from "../api/user";
 import { OrderContext } from "../contexts/OrderContext";
 import { SystemContext } from "../contexts/SystemContext";
@@ -13,19 +13,10 @@ import LoginModal from "./modals/LoginModal";
 import RegisterModal from "./modals/RegisterModal";
 import Stepper from "./step/Stepper";
 
-const HEADER_TEXT: string[] = [
-  "Choose your hair style",
-  "Do you color or treat your hair ?",
-  "Select your hair goals",
-  "Customize your formula",
-  "Select your color",
-  "Select your fragrance",
-  "Make it your own!",
-];
-
 function Navbar() {
   const router = useRouter();
-  const { i18n } = useTranslation();
+  const { pathname, asPath, query } = router;
+  const { t, i18n } = useTranslation();
   const { user, setUser, isAuthenticated, setIsAuthenticated } =
     useContext(UserContext);
   const { currentStep } = useContext(OrderContext);
@@ -37,6 +28,16 @@ function Navbar() {
     setShowRegisterModal,
   } = useContext(SystemContext);
   const [activeLanguageIndex, setActiveLanguageIndex] = useState<number>(0);
+
+  const HEADER_TEXT: string[] = [
+    t("hairStyle.title"),
+    "Do you color or treat your hair ?",
+    "Select your hair goals",
+    "Customize your formula",
+    "Select your color",
+    "Select your fragrance",
+    "Make it your own!",
+  ];
 
   useEffect(() => {
     let isSubscribed = true;
@@ -78,12 +79,9 @@ function Navbar() {
   }
 
   function handleToggleLanguage() {
-    i18n.changeLanguage(
-      availableLanguage[(activeLanguageIndex + 1) % availableLanguage.length]
-    );
-    setActiveLanguageIndex(
-      (activeLanguageIndex + 1) % availableLanguage.length
-    );
+    router.push({ pathname, query }, asPath, {
+      locale: i18n.language === "en" ? "th" : "en",
+    });
   }
 
   function handleGoBack() {
@@ -121,14 +119,26 @@ function Navbar() {
           </h1>
         </div>
         <div className="flex flex-grow justify-end items-center">
-          <div
-            className="absolute right-12 cursor-pointer"
-            onClick={() => {
-              handleToggleLanguage();
-            }}
-          >
-            {availableLanguage[activeLanguageIndex].toUpperCase()}
-          </div>
+          {currentStep === 0 && (
+            <div
+              className="flex absolute right-12 cursor-pointer"
+              onClick={() => {
+                handleToggleLanguage();
+              }}
+            >
+              <p
+                className={`${i18n.language === "en" ? "font-extrabold" : ""}`}
+              >
+                EN
+              </p>
+              /
+              <p
+                className={`${i18n.language === "th" ? "font-extrabold" : ""}`}
+              >
+                TH
+              </p>
+            </div>
+          )}
           {!isAuthenticated && (
             <Image
               src={`${process.env.REACT_APP_S3_PREFIX}/user-icon.png`}

@@ -32,7 +32,7 @@ const HairColor: NextPageWithLayout = () => {
   return (
     <div className="flex flex-grow flex-col">
       <div className="flex flex-grow flex-col">
-        <div className="px-1 py-4 grid grid-cols-2 sm:grid-cols-3 gap-1 overflow-y-auto">
+        <div className="px-1 py-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 overflow-y-auto">
           {COLOR.map((color, colorIndex) => {
             return (
               <ColorCard

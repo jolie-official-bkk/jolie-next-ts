@@ -8,7 +8,7 @@ export const HAIR_GOAL_MATCH = new Map<THairGoal, string[]>([
   ["Hydrate", ["Damage Remedy", "Shine"]],
   ["Nourish Roots", ["Strengthen"]],
   ["Oil Control", ["Oil Control", "Anti-Dandruff"]],
-  ["Reduce Brassiness", ["Color Protection", "Damage Remedy"]],
+  // ["Reduce Brassiness", ["Color Protection", "Damage Remedy"]],
   ["Rejuvenate", ["Strengthen", "Damage Remedy"]],
   ["Shine", ["Shine"]],
   ["Straighten", ["Strengthen"]],

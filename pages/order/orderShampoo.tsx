@@ -41,7 +41,10 @@ const OrderShampoo: NextPageWithLayout = () => {
   }
 
   function onChange(event: ChangeEvent<HTMLInputElement>): void {
-    setOrderContext({ ...orderContext, shampoo_name: event.target.value });
+    setOrderContext({
+      ...orderContext,
+      shampoo_name: event.target.value.toUpperCase(),
+    });
   }
 
   return (
@@ -66,15 +69,16 @@ const OrderShampoo: NextPageWithLayout = () => {
         className="flex flex-grow flex-col items-center"
         onSubmit={handleSubmitOrder}
       >
-        <header className="text-lg">Name Your Bottle!</header>
+        <header className="text-lg">Name your bottle!</header>
         <input
-          className="bg-gray-50 text-black text-sm text-center rounded-lg my-5 focus:ring-blue-500 focus:border-blue-500 block p-2.5 shadow-md shadow-black/40"
+          className="bg-gray-100 text-black text-sm text-center rounded-full my-5 focus:ring-blue-500 focus:border-blue-500 block p-2.5 shadow-md shadow-black/30"
           name="shampoo_name"
-          placeholder="Your Name"
+          placeholder="Your name"
+          value={orderContext.shampoo_name || ""}
           onChange={onChange}
           required
         />
-        <p>* This name will show on your bottle</p>
+        <p className="text-gray-500">* This name will show on your bottle</p>
       </form>
       <Button
         onClick={() => {

@@ -1,6 +1,27 @@
 {
   "landing": {
     "title": "Your Hair Your Choice",
-    "createShampooButton": "CREATE YOUR SHAMPOO"
+    "button": "CREATE YOUR SHAMPOO"
+  },
+  "hairStyle": {
+    "title": "Choose your hair style",
+    "naturalHairType": {
+      "title": "Natural Hair Type",
+      "straight": "Straight",
+      "wavy": "Wavy",
+      "curly": "Curly"
+    },
+    "hairStructure": {
+      "title": "Hair Structure",
+      "fine": "Fine",
+      "medium": "Medium",
+      "coarse": "Coarse"
+    },
+    "scalpMoisture": {
+      "title": "Scalp Moisture",
+      "dry": "Dry",
+      "balanced": "Balanced",
+      "oily": "Oily"
+    }
   }
 }

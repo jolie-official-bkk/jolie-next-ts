@@ -1,8 +1,8 @@
 import Image from "next/image";
 import React, { ReactNode, useContext } from "react";
 import { OrderContext } from "../../contexts/OrderContext";
+import { FormulaData } from "../../data/formulaData";
 import { HAIR_GOAL_MATCH } from "../../data/hairGoalMatch";
-import Logo from "../Logo";
 
 type Props = {
   children: ReactNode;
@@ -34,10 +34,15 @@ function SummaryCard() {
         </p>
       </h3>
       <p style={{ fontSize: "0.6rem" }}>
-        {!!orderContext.hair_goal.length
-          ? (HAIR_GOAL_MATCH.get(orderContext.hair_goal[0]) || ["test"]).join(
-              " • "
-            )
+        {!!orderContext.formula.length
+          ? orderContext.formula
+              .map(
+                (formula, formulaIndex) =>
+                  FormulaData.filter(
+                    (_formula) => _formula.formulaName === formula
+                  )[0].property
+              )
+              .join(" • ")
           : ""}
       </p>
       <Header>Formula :</Header>

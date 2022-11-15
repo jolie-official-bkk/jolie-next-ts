@@ -20,7 +20,7 @@ export const hairGoal = [
   "Hydrate",
   "Nourish Roots",
   "Oil Control",
-  "Reduce Brassiness",
+  // "Reduce Brassiness",
   "Rejuvenate",
   "Shine",
   "Straighten",

@@ -75,7 +75,7 @@ const Home: NextPageWithLayout = () => {
             router.push("/order/hairStyle");
           }}
         >
-          <b className="font-extrabold">{t("landing.createShampooButton")}</b>
+          <b className="font-extrabold">{t("landing.button")}</b>
         </button>
         <Image
           src={`${process.env.REACT_APP_S3_PREFIX}/bottle/bottle-all.png`}

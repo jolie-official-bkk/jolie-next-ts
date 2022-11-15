@@ -1,6 +1,27 @@
 {
   "landing": {
-    "title": "ผมฉันเอง",
-    "createShampooButton": "สร้างโล้ดด"
+    "title": "เลือกสภาพเส้นผมของคุณ",
+    "button": "สร้างเลย"
+  },
+  "hairStyle": {
+    "title": "เลือกประเภทของเส้นผม",
+    "naturalHairType": {
+      "title": "ประเภทของเส้นผม",
+      "straight": "ผมตรง",
+      "wavy": "ผมหยิก",
+      "curly": "ผมหยักศก"
+    },
+    "hairStructure": {
+      "title": "โครงสร้างเส้นผม",
+      "fine": "เส้นผมบาง",
+      "medium": "เส้นผมปานกลาง",
+      "coarse": "เส้นผมหนา"
+    },
+    "scalpMoisture": {
+      "title": "ความชุ่มชื้นของหนังศีรษะ",
+      "dry": "แห้ง",
+      "balanced": "ธรรมดา",
+      "oily": "มัน"
+    }
   }
 }

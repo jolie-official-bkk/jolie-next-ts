@@ -47,7 +47,7 @@ const HairTreat: NextPageWithLayout = () => {
             ...orderContext,
             hair_treat: [
               ...orderContext.hair_treat.filter(
-                (_item) => !["None of these", "Natural hair"].includes(_item)
+                (_item) => !["None of these", "Natural Hair"].includes(_item)
               ),
               item,
             ],

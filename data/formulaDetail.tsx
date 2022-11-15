@@ -1,9 +1,9 @@
 export const FORMULA_DETAIL: string[] = [
-  "Damage Remedy : coconut, bran, jojoba, evening primrose",
-  "Anti-Dandruff : evening primrose, sunflower seed, moringa, sweet almond",
-  "Color Protection : moringa, evening primrose, rose hip, sesame",
-  "Thermal Protection : coconut, avocado, macadamia, grape seed",
-  "Shine : bergamot, sesame, bran, sunflower seed",
-  "Strengthen : tea tree, moringa, jojoba, sunflower seed",
-  "Oil Control : rose hip, coconut, sweet almond, grape seed",
+  "Damage Remedy : clove, coconut, bran, jojoba, evening primrose",
+  "Anti-Dandruff : lemon, evening primrose, sunflower seed, moringa",
+  "Color Protection : marjoram, moringa, evening primrose, rose hip",
+  "Thermal Protection : peppermint, coconut, avocado, macadamia, grape seed",
+  "Shine : coconut, bergamot, sesame, bran, sunflower seed",
+  "Strengthen : macadamia, tea tree, moringa, jojoba, sunflower seed",
+  "Oil Control : lemon, rose hip, coconut, sweet almond, grape seed",
 ];
