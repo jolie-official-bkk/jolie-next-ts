@@ -14,9 +14,13 @@ import { OrderContext } from "../../contexts/OrderContext";
 import { FormLayout } from "../../layouts/FormLayout";
 import Button from "../../components/buttons/Button";
 import type { NextPageWithLayout } from "../_app";
+import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const HairStyle: NextPageWithLayout = () => {
   const router = useRouter();
+  const { t } = useTranslation();
+
   const { orderContext, setOrderContext, setCurrentStep } =
     useContext(OrderContext);
 
@@ -31,7 +35,7 @@ const HairStyle: NextPageWithLayout = () => {
   return (
     <div className="flex flex-grow flex-col">
       <div className="flex flex-grow flex-col">
-        <SubHeader>Natural Hair Type</SubHeader>
+        <SubHeader>{"test"}</SubHeader>
         <div className="flex w-full justify-evenly">
           {naturalHairTypeArray.map((item: TNaturalHair, itemIndex) => (
             <div
@@ -132,3 +136,9 @@ HairStyle.getLayout = function getLayout(page: ReactElement) {
 };
 
 export default HairStyle;
+
+export const getStaticProps = async ({ locale }: { locale: string }) => ({
+  props: {
+    ...(await serverSideTranslations(locale, ["common"])),
+  },
+});

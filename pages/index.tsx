@@ -9,9 +9,12 @@ import { OrderContext } from "../contexts/OrderContext";
 import { UserContext } from "../contexts/UserContext";
 import { FormLayout } from "../layouts/FormLayout";
 import type { NextPageWithLayout } from "./_app";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
 
 const Home: NextPageWithLayout = () => {
   const router = useRouter();
+  const { t } = useTranslation();
   const { user, setUser, setIsAuthenticated } = useContext(UserContext);
   const { orderContext, setOrderContext, setCurrentStep } =
     useContext(OrderContext);
@@ -56,7 +59,7 @@ const Home: NextPageWithLayout = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="flex flex-col flex-grow items-center pt-20">
-        <h1 className="text-3xl font-extrabold">Your Hair Your Solution</h1>
+        <h1 className="text-3xl font-extrabold">{t("landing.title")}</h1>
         <div className="my-4">
           {/* <Image
             src={`${process.env.REACT_APP_S3_PREFIX}/logo-full.png`}
@@ -72,9 +75,7 @@ const Home: NextPageWithLayout = () => {
             router.push("/order/hairStyle");
           }}
         >
-          <b className="font-extrabold">
-            CREATE&nbsp;&nbsp;YOUR&nbsp;&nbsp;SHAMPOO
-          </b>
+          <b className="font-extrabold">{t("landing.createShampooButton")}</b>
         </button>
         <Image
           src={`${process.env.REACT_APP_S3_PREFIX}/bottle/bottle-all.png`}
@@ -93,3 +94,9 @@ Home.getLayout = function getLayout(page: ReactElement) {
 };
 
 export default Home;
+
+export const getStaticProps = async ({ locale }: { locale: string }) => ({
+  props: {
+    ...(await serverSideTranslations(locale, ["common"])),
+  },
+});

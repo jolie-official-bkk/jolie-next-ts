@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 
 require("dotenv").config();
+const { i18n } = require("./next-i18next.config");
 
 const nextConfig = {
   env: {
@@ -14,6 +15,7 @@ const nextConfig = {
       "amazonaws.com",
     ],
   },
+  i18n,
   reactStrictMode: true,
   swcMinify: true,
   output: "standalone",

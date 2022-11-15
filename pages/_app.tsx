@@ -5,6 +5,7 @@ import type { NextPage } from "next";
 import { OrderContextProvider } from "../contexts/OrderContext";
 import { UserContextProvider } from "../contexts/UserContext";
 import { SystemContextProvider } from "../contexts/SystemContext";
+import { appWithTranslation } from "next-i18next";
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -14,7 +15,7 @@ type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
 
-export default function App({ Component, pageProps }: AppPropsWithLayout) {
+function App({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page);
   return (
     <SystemContextProvider>
@@ -26,3 +27,5 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
     </SystemContextProvider>
   );
 }
+
+export default appWithTranslation(App);

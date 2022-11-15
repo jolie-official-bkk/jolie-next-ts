@@ -1,11 +1,13 @@
 import { ChevronLeftIcon } from "@heroicons/react/outline";
+import { useTranslation } from "next-i18next";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { getUserInfo } from "../api/user";
 import { OrderContext } from "../contexts/OrderContext";
 import { SystemContext } from "../contexts/SystemContext";
 import { UserContext } from "../contexts/UserContext";
+import { availableLanguage } from "../types/locale";
 import Header from "./Header";
 import LoginModal from "./modals/LoginModal";
 import RegisterModal from "./modals/RegisterModal";
@@ -23,6 +25,7 @@ const HEADER_TEXT: string[] = [
 
 function Navbar() {
   const router = useRouter();
+  const { i18n } = useTranslation();
   const { user, setUser, isAuthenticated, setIsAuthenticated } =
     useContext(UserContext);
   const { currentStep } = useContext(OrderContext);
@@ -33,6 +36,7 @@ function Navbar() {
     showRegisterModal,
     setShowRegisterModal,
   } = useContext(SystemContext);
+  const [activeLanguageIndex, setActiveLanguageIndex] = useState<number>(0);
 
   useEffect(() => {
     let isSubscribed = true;
@@ -73,6 +77,15 @@ function Navbar() {
     }
   }
 
+  function handleToggleLanguage() {
+    i18n.changeLanguage(
+      availableLanguage[(activeLanguageIndex + 1) % availableLanguage.length]
+    );
+    setActiveLanguageIndex(
+      (activeLanguageIndex + 1) % availableLanguage.length
+    );
+  }
+
   function handleGoBack() {
     router.back();
   }
@@ -98,14 +111,29 @@ function Navbar() {
           />
         </div>
         <div className="flex items-center">
-          <h1 className="text-2xl lg:text-4xl font-medium text-black">JOLIE</h1>
+          <h1
+            className="text-2xl lg:text-4xl font-medium text-black cursor-pointer"
+            onClick={() => {
+              router.push("/");
+            }}
+          >
+            JOLIE
+          </h1>
         </div>
         <div className="flex flex-grow justify-end items-center">
+          <div
+            className="absolute right-12 cursor-pointer"
+            onClick={() => {
+              handleToggleLanguage();
+            }}
+          >
+            {availableLanguage[activeLanguageIndex].toUpperCase()}
+          </div>
           {!isAuthenticated && (
             <Image
               src={`${process.env.REACT_APP_S3_PREFIX}/user-icon.png`}
               alt={"user icon"}
-              className="w-8 h-8 p-1.5"
+              className="w-8 h-8 p-1.5 cursor-pointer"
               width={32}
               height={32}
               onClick={() => {
