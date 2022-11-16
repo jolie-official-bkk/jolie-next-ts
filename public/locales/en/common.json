@@ -5,23 +5,16 @@
   },
   "hairStyle": {
     "title": "Choose your hair style",
-    "naturalHairType": {
-      "title": "Natural Hair Type",
-      "straight": "Straight",
-      "wavy": "Wavy",
-      "curly": "Curly"
-    },
-    "hairStructure": {
-      "title": "Hair Structure",
-      "fine": "Fine",
-      "medium": "Medium",
-      "coarse": "Coarse"
-    },
-    "scalpMoisture": {
-      "title": "Scalp Moisture",
-      "dry": "Dry",
-      "balanced": "Balanced",
-      "oily": "Oily"
-    }
+    "naturalHairType": "Natural Hair Type",
+    "hairStructure": "Hair Structure",
+    "scalpMoisture": "Scalp Moisture"
+  },
+  "hairTreat": {
+    "title": "Do you color or treat your hair ?",
+    "subTitle": "Select all that apply"
+  },
+  "hairGoal": {
+    "title": "Select your hair goals",
+    "subTitle": "choose up to 5"
   }
 }

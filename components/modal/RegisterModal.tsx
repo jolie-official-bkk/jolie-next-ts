@@ -11,9 +11,9 @@ import React, {
 import { handleRegister } from "../../api/auth";
 import { UserContext } from "../../contexts/UserContext";
 import { IRegister } from "../../interfaces/user.interface";
-import Dropdown from "../inputs/Dropdown";
-import TextInput from "../inputs/TextInput";
-import CircleSpinner from "../loadings/CircleSpinner";
+import Dropdown from "../input/Dropdown";
+import TextInput from "../input/TextInput";
+import CircleSpinner from "../loading/CircleSpinner";
 
 type PropsType = {
   showRegisterModal: boolean;

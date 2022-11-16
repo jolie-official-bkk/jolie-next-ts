@@ -10,8 +10,8 @@ import React, {
 } from "react";
 import { ILogin } from "../../interfaces/user.interface";
 import { handleLogin } from "../../api/auth";
-import TextInput from "../inputs/TextInput";
-import CircleSpinner from "../loadings/CircleSpinner";
+import TextInput from "../input/TextInput";
+import CircleSpinner from "../loading/CircleSpinner";
 import { UserContext } from "../../contexts/UserContext";
 
 type PropsType = {

@@ -9,8 +9,8 @@ import { SystemContext } from "../contexts/SystemContext";
 import { UserContext } from "../contexts/UserContext";
 import { availableLanguage } from "../types/locale";
 import Header from "./Header";
-import LoginModal from "./modals/LoginModal";
-import RegisterModal from "./modals/RegisterModal";
+import LoginModal from "./modal/LoginModal";
+import RegisterModal from "./modal/RegisterModal";
 import Stepper from "./step/Stepper";
 
 function Navbar() {

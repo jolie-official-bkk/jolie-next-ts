@@ -16,6 +16,7 @@ import Button from "../../components/buttons/Button";
 import type { NextPageWithLayout } from "../_app";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { hairStructureData, IData, naturalHairTypeData } from "../../data/data";
 
 const HairStyle: NextPageWithLayout = () => {
   const router = useRouter();
@@ -35,65 +36,57 @@ const HairStyle: NextPageWithLayout = () => {
   return (
     <div className="flex flex-grow flex-col">
       <div className="flex flex-grow flex-col">
-        <SubHeader>{t("hairStyle.naturalHairType.title")}</SubHeader>
+        <SubHeader>{t("hairStyle.naturalHairType")}</SubHeader>
         <div className="flex w-full justify-evenly">
-          {naturalHairTypeArray.map((item: TNaturalHair, itemIndex) => (
+          {naturalHairTypeData.map((item: IData, itemIndex) => (
             <div
               key={itemIndex}
               onClick={() => {
                 setOrderContext({
                   ...orderContext,
                   ["natural_hair_type"]: orderContext.natural_hair_type
-                    ? orderContext.natural_hair_type === item
+                    ? orderContext.natural_hair_type === item.name
                       ? null
-                      : item
-                    : item,
+                      : item.name
+                    : item.name,
                 });
               }}
             >
               <HairCard
-                key={itemIndex}
                 item={item}
                 imagePrefix={"hair-style"}
-                isActive={orderContext.natural_hair_type === item}
-                displayText={t(
-                  `hairStyle.naturalHairType.${item.toLocaleLowerCase()}`
-                )}
+                isActive={orderContext.natural_hair_type === item.name}
               />
             </div>
           ))}
         </div>
-        <SubHeader>{t("hairStyle.hairStructure.title")}</SubHeader>
+        <SubHeader>{t("hairStyle.hairStructure")}</SubHeader>
         <div className="flex w-full justify-evenly">
-          {hairStructure.map((item: THairStructure, itemIndex) => (
+          {hairStructureData.map((item: IData, itemIndex) => (
             <div
               key={itemIndex}
               onClick={() => {
                 setOrderContext({
                   ...orderContext,
                   ["hair_structure"]: orderContext.hair_structure
-                    ? orderContext.hair_structure === item
+                    ? orderContext.hair_structure === item.name
                       ? null
-                      : item
-                    : item,
+                      : item.name
+                    : item.name,
                 });
               }}
             >
               <HairCard
-                key={itemIndex}
                 item={item}
                 imagePrefix={"hair-structure"}
-                isActive={orderContext.hair_structure === item}
-                displayText={t(
-                  `hairStyle.hairStructure.${item.toLocaleLowerCase()}`
-                )}
+                isActive={orderContext.hair_structure === item.name}
               />
             </div>
           ))}
         </div>
-        <SubHeader>{t("hairStyle.scalpMoisture.title")}</SubHeader>
+        <SubHeader>{t("hairStyle.scalpMoisture")}</SubHeader>
         <div className="flex justify-evenly pb-4">
-          {scalpMoisture.map((item: TScalpMoisture, itemIndex) => (
+          {hairStructureData.map((item: IData, itemIndex) => (
             <div
               key={itemIndex}
               style={{
@@ -104,10 +97,10 @@ const HairStyle: NextPageWithLayout = () => {
                 setOrderContext({
                   ...orderContext,
                   ["scalp_moisture"]: orderContext.scalp_moisture
-                    ? orderContext.scalp_moisture === item
+                    ? orderContext.scalp_moisture === item.name
                       ? null
-                      : item
-                    : item,
+                      : item.name
+                    : item.name,
                 });
               }}
             >
@@ -115,10 +108,7 @@ const HairStyle: NextPageWithLayout = () => {
                 key={itemIndex}
                 item={item}
                 imagePrefix={"scalp-moisture"}
-                isActive={orderContext.scalp_moisture === item}
-                displayText={t(
-                  `hairStyle.scalpMoisture.${item.toLocaleLowerCase()}`
-                )}
+                isActive={orderContext.scalp_moisture === item.name}
               />
             </div>
           ))}
