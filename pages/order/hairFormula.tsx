@@ -1,4 +1,5 @@
 import { ThumbUpIcon } from "@heroicons/react/outline";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useRouter } from "next/router";
 import React, { ReactElement, useContext, useEffect, useState } from "react";
 import Button from "../../components/buttons/Button";
@@ -77,8 +78,6 @@ const HairFormula: NextPageWithLayout = () => {
     }
   }
 
-  console.log(recommendedFormulas);
-
   return (
     <div className="flex flex-grow flex-col">
       <div className="flex flex-grow flex-col items-center overflow-y-auto">
@@ -117,3 +116,9 @@ HairFormula.getLayout = function getLayout(page: ReactElement) {
 };
 
 export default HairFormula;
+
+export const getStaticProps = async ({ locale }: { locale: string }) => ({
+  props: {
+    ...(await serverSideTranslations(locale, ["common"])),
+  },
+});

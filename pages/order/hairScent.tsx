@@ -5,6 +5,7 @@ import { OrderContext } from "../../contexts/OrderContext";
 import ScentCard from "../../components/card/ScentCard";
 import { FormLayout } from "../../layouts/FormLayout";
 import type { NextPageWithLayout } from "../_app";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const SCENT = [
   {
@@ -89,3 +90,9 @@ HairScent.getLayout = function getLayout(page: ReactElement) {
 };
 
 export default HairScent;
+
+export const getStaticProps = async ({ locale }: { locale: string }) => ({
+  props: {
+    ...(await serverSideTranslations(locale, ["common"])),
+  },
+});

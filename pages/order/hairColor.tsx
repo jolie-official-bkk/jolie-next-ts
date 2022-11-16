@@ -1,3 +1,4 @@
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useRouter } from "next/router";
 import React, { ReactElement, useContext, useEffect } from "react";
 import Button from "../../components/buttons/Button";
@@ -71,3 +72,9 @@ HairColor.getLayout = function getLayout(page: ReactElement) {
 };
 
 export default HairColor;
+
+export const getStaticProps = async ({ locale }: { locale: string }) => ({
+  props: {
+    ...(await serverSideTranslations(locale, ["common"])),
+  },
+});

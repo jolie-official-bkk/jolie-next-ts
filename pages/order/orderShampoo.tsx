@@ -1,3 +1,4 @@
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, {
@@ -97,3 +98,9 @@ OrderShampoo.getLayout = function getLayout(page: ReactElement) {
 };
 
 export default OrderShampoo;
+
+export const getStaticProps = async ({ locale }: { locale: string }) => ({
+  props: {
+    ...(await serverSideTranslations(locale, ["common"])),
+  },
+});

@@ -1,3 +1,4 @@
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useRouter } from "next/router";
 import React, { ReactElement, useContext, useEffect } from "react";
 import Button from "../../components/buttons/Button";
@@ -84,3 +85,9 @@ HairGoal.getLayout = function getLayout(page: ReactElement) {
 };
 
 export default HairGoal;
+
+export const getStaticProps = async ({ locale }: { locale: string }) => ({
+  props: {
+    ...(await serverSideTranslations(locale, ["common"])),
+  },
+});
