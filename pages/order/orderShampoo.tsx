@@ -1,3 +1,4 @@
+import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -15,8 +16,11 @@ import { OrderContext } from "../../contexts/OrderContext";
 import { FormLayout } from "../../layouts/FormLayout";
 import type { NextPageWithLayout } from "../_app";
 
+const SHAMPOO_NAME_MAX_LENGTH = 10;
+
 const OrderShampoo: NextPageWithLayout = () => {
   const router = useRouter();
+  const { t } = useTranslation();
   const { orderContext, setOrderContext, setCurrentStep } =
     useContext(OrderContext);
   const [buttonText, setButtonText] = useState<string>("Order!");
@@ -70,16 +74,17 @@ const OrderShampoo: NextPageWithLayout = () => {
         className="flex flex-grow flex-col items-center"
         onSubmit={handleSubmitOrder}
       >
-        <header className="text-lg">Name your bottle!</header>
+        <header className="text-lg">{t("orderShampoo.nameYourBottle")}</header>
         <input
           className="bg-gray-100 text-black text-sm text-center rounded-full my-5 focus:ring-blue-500 focus:border-blue-500 block p-2.5 shadow-md shadow-black/30"
           name="shampoo_name"
-          placeholder="Your name"
+          placeholder={t("orderShampoo.shampooNamePlaceholder")}
           value={orderContext.shampoo_name || ""}
           onChange={onChange}
+          maxLength={SHAMPOO_NAME_MAX_LENGTH}
           required
         />
-        <p className="text-gray-500">* This name will show on your bottle</p>
+        <p className="text-gray-500">* {t("orderShampoo.disclaimer")}</p>
       </form>
       <Button
         onClick={() => {
@@ -87,7 +92,7 @@ const OrderShampoo: NextPageWithLayout = () => {
         }}
         disabled={!orderContext.shampoo_name}
       >
-        {buttonText}
+        {t("button.order")}!
       </Button>
     </div>
   );

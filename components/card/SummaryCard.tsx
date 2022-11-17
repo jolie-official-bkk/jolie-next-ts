@@ -33,11 +33,11 @@ function SummaryCard() {
           {orderContext.shampoo_name ? orderContext.shampoo_name : "YOURNAME"}
         </p>
       </h3>
-      <p style={{ fontSize: "0.6rem" }}>
+      <p style={{ fontSize: "0.5rem" }}>
         {!!orderContext.formula.length
           ? orderContext.formula
               .map(
-                (formula, formulaIndex) =>
+                (formula) =>
                   FormulaData.filter(
                     (_formula) => _formula.formulaName === formula
                   )[0].property

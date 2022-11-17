@@ -6,6 +6,7 @@ import { IFormula } from "../../interfaces/hair.interface";
 interface Props extends IFormula {
   isActive: boolean;
   isRecommended: boolean;
+  imageName: string;
   onClick: MouseEventHandler;
 }
 
@@ -14,6 +15,7 @@ function FormulaCard({
   formulaDetail,
   isActive,
   isRecommended,
+  imageName,
   onClick,
 }: Props) {
   return (
@@ -25,7 +27,7 @@ function FormulaCard({
       onClick={onClick}
     >
       <Image
-        src={`${process.env.REACT_APP_S3_PREFIX}/formula/${formulaName}.jpg`}
+        src={`${process.env.REACT_APP_S3_PREFIX}/formula/${imageName}.jpg`}
         alt={"formula image"}
         className={"h-24 rounded-tl-md rounded-bl-md object-cover"}
         width={240}
@@ -35,9 +37,9 @@ function FormulaCard({
       <div
         className={`flex flex-col justify-around text-${
           isActive ? "white" : "black"
-        } px-4 py-3 w-full`}
+        } px-2 py-3 w-full`}
       >
-        <b className="flex items-center underline">
+        <b className="flex text-sm items-center underline">
           {formulaName}
           {isRecommended && <ThumbUpIcon className="w-4 h-4 ml-2" />}
         </b>

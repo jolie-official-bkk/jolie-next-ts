@@ -1,3 +1,4 @@
+import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useRouter } from "next/router";
 import React, { ReactElement, useContext, useEffect } from "react";
@@ -5,12 +6,13 @@ import Button from "../../components/buttons/Button";
 import GridCard from "../../components/card/GridCard";
 import SubHeader from "../../components/SubHeader";
 import { OrderContext } from "../../contexts/OrderContext";
-import { hairTreat, THairTreat } from "../../interfaces/hair.interface";
+import { hairTreatData, IData } from "../../data/data";
 import { FormLayout } from "../../layouts/FormLayout";
 import type { NextPageWithLayout } from "../_app";
 
 const HairTreat: NextPageWithLayout = () => {
   const router = useRouter();
+  const { t } = useTranslation();
 
   const { orderContext, setOrderContext, setCurrentStep } =
     useContext(OrderContext);
@@ -23,34 +25,34 @@ const HairTreat: NextPageWithLayout = () => {
     router.push("/order/hairGoal");
   }
 
-  function checkItemClicked(item: string): boolean {
+  function checkItemClicked(itemName: string): boolean {
     if (orderContext.hair_treat) {
-      return orderContext.hair_treat.includes(item);
+      return orderContext.hair_treat.includes(itemName);
     }
 
     return false;
   }
 
-  function onItemClicked(item: string): void {
+  function onItemClicked(item: IData): void {
     if (orderContext.hair_treat) {
-      if (checkItemClicked(item)) {
+      if (checkItemClicked(item.name)) {
         setOrderContext({
           ...orderContext,
           hair_treat: orderContext.hair_treat.filter(
-            (_item: string) => _item !== item
+            (_item: string) => _item !== item.name
           ),
         });
       } else {
-        if (item === "None of these" || item === "Natural Hair") {
-          setOrderContext({ ...orderContext, hair_treat: [item] });
+        if (item.name === "none of these" || item.name === "natural hair") {
+          setOrderContext({ ...orderContext, hair_treat: [item.name] });
         } else {
           setOrderContext({
             ...orderContext,
             hair_treat: [
               ...orderContext.hair_treat.filter(
-                (_item) => !["None of these", "Natural Hair"].includes(_item)
+                (_item) => !["none of these", "natural hair"].includes(_item)
               ),
-              item,
+              item.name,
             ],
           });
         }
@@ -61,16 +63,16 @@ const HairTreat: NextPageWithLayout = () => {
   return (
     <div className="flex flex-grow flex-col">
       <div className="flex flex-grow flex-col">
-        <SubHeader>Select all that apply</SubHeader>
+        <SubHeader>{t("hairTreat.subTitle")}</SubHeader>
         <div className="px-1 mb-2 grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-1">
-          {hairTreat.map((item: THairTreat, itemIndex) => (
+          {hairTreatData.map((item: IData, itemIndex) => (
             <GridCard
               key={itemIndex}
+              isActive={checkItemClicked(item.name)}
+              item={item}
               onClick={() => {
                 onItemClicked(item);
               }}
-              isActive={checkItemClicked(item)}
-              item={item}
             />
           ))}
         </div>
@@ -81,7 +83,7 @@ const HairTreat: NextPageWithLayout = () => {
         }}
         disabled={!!!orderContext.hair_treat?.length}
       >
-        Next
+        {t("button.next")}
       </Button>
     </div>
   );

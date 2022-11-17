@@ -1,4 +1,5 @@
 import { ThumbUpIcon } from "@heroicons/react/outline";
+import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useRouter } from "next/router";
 import React, { ReactElement, useContext, useEffect, useState } from "react";
@@ -6,8 +7,11 @@ import Button from "../../components/buttons/Button";
 import FormulaCard from "../../components/card/FormulaCard";
 import SubHeader from "../../components/SubHeader";
 import { OrderContext } from "../../contexts/OrderContext";
-import { FormulaData, IFormulaData } from "../../data/formulaData";
-import { FORMULA_DETAIL } from "../../data/formulaDetail";
+import {
+  formulaData,
+  IFormulaData,
+  formulaIngredientData,
+} from "../../data/data";
 import { HAIR_GOAL_MATCH } from "../../data/hairGoalMatch";
 import {
   formulaName,
@@ -19,6 +23,7 @@ import { NextPageWithLayout } from "../_app";
 
 const HairFormula: NextPageWithLayout = () => {
   const router = useRouter();
+  const { i18n, t } = useTranslation();
 
   const { orderContext, setOrderContext, setCurrentStep } =
     useContext(OrderContext);
@@ -52,9 +57,9 @@ const HairFormula: NextPageWithLayout = () => {
     );
   }
 
-  function checkItemClicked(item: string): boolean {
+  function checkItemClicked(itemName: string): boolean {
     if (orderContext.formula) {
-      return orderContext.formula.includes(item);
+      return orderContext.formula.includes(itemName);
     }
 
     return false;
@@ -81,21 +86,32 @@ const HairFormula: NextPageWithLayout = () => {
   return (
     <div className="flex flex-grow flex-col">
       <div className="flex flex-grow flex-col items-center overflow-y-auto">
-        <SubHeader>Choose 3 formulas</SubHeader>
+        <SubHeader>{t("formula.subTitle")}</SubHeader>
         <p className="flex text-black/50">
           <ThumbUpIcon className="w-6 h-6 mr-2 mb-2 text-black/50" />
-          Recommended formulas based on your goals
+          {t("formula.recommendText")}
         </p>
-        {FormulaData.map((formula: IFormulaData, formulaIndex) => (
+        {formulaData.map((formula: IFormulaData, formulaIndex) => (
           <FormulaCard
             key={formulaIndex}
-            formulaName={formula.formulaName}
-            formulaDetail={`${formula.property} : ${formula.ingredients.join(
-              ", "
-            )}`}
-            isActive={checkItemClicked(formula.formulaName)}
-            isRecommended={recommendedFormulas.includes(formula.property)}
-            onClick={() => onItemClicked(formula.formulaName)}
+            formulaName={
+              i18n.language === "en"
+                ? formula.formulaName.en
+                : formula.formulaName.th
+            }
+            formulaDetail={`${
+              i18n.language === "en" ? formula.property.en : formula.property.th
+            } : ${formula.ingredientIds
+              .map((ingredientId) =>
+                i18n.language === "en"
+                  ? formulaIngredientData[ingredientId - 1].en
+                  : formulaIngredientData[ingredientId - 1].th
+              )
+              .join(", ")}`}
+            isActive={checkItemClicked(formula.formulaName.name)}
+            isRecommended={recommendedFormulas.includes(formula.property.name)}
+            imageName={formula.formulaName.name}
+            onClick={() => onItemClicked(formula.formulaName.name)}
           />
         ))}
       </div>
@@ -105,7 +121,7 @@ const HairFormula: NextPageWithLayout = () => {
         }}
         disabled={orderContext.formula?.length !== 3}
       >
-        Next
+        {t("button.next")}
       </Button>
     </div>
   );

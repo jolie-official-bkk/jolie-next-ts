@@ -5,10 +5,17 @@ interface IScentCard {
   scent: string;
   isActive: boolean;
   onClick: MouseEventHandler;
-  scentList: string[];
+  scentIngredients: string[];
+  imageName: string;
 }
 
-function ScentCard({ scent, isActive, onClick, scentList }: IScentCard) {
+function ScentCard({
+  scent,
+  isActive,
+  onClick,
+  scentIngredients,
+  imageName,
+}: IScentCard) {
   return (
     <div
       className={`flex flex-col flex-grow max-w-[200px] mx-auto items-center bg-${
@@ -18,7 +25,7 @@ function ScentCard({ scent, isActive, onClick, scentList }: IScentCard) {
       onClick={onClick}
     >
       <Image
-        src={`${process.env.REACT_APP_S3_PREFIX}/scent/${scent}.jpg`}
+        src={`${process.env.REACT_APP_S3_PREFIX}/scent/${imageName}.jpg`}
         alt={"scent image"}
         className={"h-32 object-cover rounded-xl"}
         width={300}
@@ -26,16 +33,16 @@ function ScentCard({ scent, isActive, onClick, scentList }: IScentCard) {
         priority
       />
       <b
-        className={`py-${!!scentList.length ? 0 : 2} text-[11px] text-${
-          isActive ? "white" : "black"
-        } pt-1`}
+        className={`text-[11px] text-${isActive ? "white" : "black"} pt-${
+          !!scentIngredients.length ? 1 : 2
+        }`}
       >{`${scent}`}</b>
-      {!!scentList.length && (
+      {!!scentIngredients.length && (
         <p
           className={`font-medium text-${isActive ? "white" : "black/60"}`}
           style={{ fontSize: "0.7rem" }}
         >
-          {scentList.join(", ")}
+          {scentIngredients.join(", ")}
         </p>
       )}
     </div>

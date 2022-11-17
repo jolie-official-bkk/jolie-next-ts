@@ -1,5 +1,4 @@
 import React, { MouseEventHandler } from "react";
-import { camelCase } from "../../functions/camelCase";
 
 type Props = {
   hexColor: string;
@@ -21,9 +20,9 @@ function ColorCard({ hexColor, colorName, isActive, onClick }: Props) {
           className={`w-full h-32 rounded-xl`}
           style={{ background: hexColor }}
         />
-        <b className={`py-1 text-${isActive ? "white" : "black"}`}>
-          {camelCase(colorName)}
-        </b>
+        <p className={`py-1 text-${isActive ? "white" : "black"}`}>
+          {colorName}
+        </p>
       </div>
     </div>
   );

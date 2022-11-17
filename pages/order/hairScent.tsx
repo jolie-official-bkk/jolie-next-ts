@@ -6,36 +6,12 @@ import ScentCard from "../../components/card/ScentCard";
 import { FormLayout } from "../../layouts/FormLayout";
 import type { NextPageWithLayout } from "../_app";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-
-const SCENT = [
-  {
-    scent: "Gardens by the Bay At Singapore",
-    scentList: ["sea breeze", "jasmine", "hyacinth"],
-  },
-  {
-    scent: "Han River In October At Korea",
-    scentList: ["hazelnut", "elemi", "pine"],
-  },
-  {
-    scent: "Maldives Sunset At Maldives",
-    scentList: ["apple", "black current", "plum"],
-  },
-  {
-    scent: "Shibuya Morning At Japan",
-    scentList: ["tangerine", "nutmeg", "bergamot"],
-  },
-  {
-    scent: "Thonglor Night Club At Thailand",
-    scentList: ["bergamot", "lemon", "pear"],
-  },
-  {
-    scent: "Fragrance Free",
-    scentList: [],
-  },
-];
+import { IScentData, ScentData, scentIngredientData } from "../../data/data";
+import { useTranslation } from "next-i18next";
 
 const HairScent: NextPageWithLayout = () => {
   const router = useRouter();
+  const { i18n } = useTranslation();
 
   const { orderContext, setOrderContext, setCurrentStep } =
     useContext(OrderContext);
@@ -52,22 +28,31 @@ const HairScent: NextPageWithLayout = () => {
     <div className="flex flex-grow flex-col">
       <div className="flex flex-grow flex-col">
         <div className="px-1 py-4 grid grid-cols-2 sm:grid-cols-3 gap-1 overflow-y-auto">
-          {SCENT.map((scent, scentIndex) => {
+          {ScentData.map((scent: IScentData, scentIndex) => {
             return (
               <ScentCard
                 key={scentIndex}
-                isActive={orderContext.scent === scent.scent}
+                isActive={orderContext.scent === scent.location.name}
                 onClick={() => {
                   setOrderContext({
                     ...orderContext,
                     scent: orderContext.scent
-                      ? orderContext.scent === scent.scent
+                      ? orderContext.scent === scent.location.name
                         ? null
-                        : scent.scent
-                      : scent.scent,
+                        : scent.location.name
+                      : scent.location.name,
                   });
                 }}
-                {...scent}
+                imageName={scent.location.name}
+                scent={
+                  i18n.language === "en" ? scent.location.en : scent.location.th
+                }
+                scentIngredients={scent.scentIngredientIds.map(
+                  (scentIngredientId) =>
+                    i18n.language === "en"
+                      ? scentIngredientData[scentIngredientId - 1].en
+                      : scentIngredientData[scentIngredientId - 1].th
+                )}
               />
             );
           })}

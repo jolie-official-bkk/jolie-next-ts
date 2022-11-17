@@ -70,7 +70,7 @@ const Home: NextPageWithLayout = () => {
           <Logo />
         </div>
         <button
-          className={`flex h-12 px-8 justify-center items-center sticky bottom-0 bg-black text-white shadow-md shadow-black/50`}
+          className={`flex min-w-[280px] h-12 px-8 justify-center items-center sticky bottom-0 bg-black text-white shadow-md shadow-black/50`}
           onClick={() => {
             router.push("/order/hairStyle");
           }}

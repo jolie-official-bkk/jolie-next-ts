@@ -2,16 +2,15 @@ import { ChevronLeftIcon } from "@heroicons/react/outline";
 import { useTranslation } from "next-i18next";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { ChangeEvent, useContext, useEffect, useState } from "react";
-import { getUserInfo } from "../api/user";
-import { OrderContext } from "../contexts/OrderContext";
-import { SystemContext } from "../contexts/SystemContext";
-import { UserContext } from "../contexts/UserContext";
-import { availableLanguage } from "../types/locale";
-import Header from "./Header";
-import LoginModal from "./modal/LoginModal";
-import RegisterModal from "./modal/RegisterModal";
-import Stepper from "./step/Stepper";
+import { useContext, useEffect } from "react";
+import { getUserInfo } from "../../api/user";
+import { OrderContext } from "../../contexts/OrderContext";
+import { SystemContext } from "../../contexts/SystemContext";
+import { UserContext } from "../../contexts/UserContext";
+import Header from "../Header";
+import LoginModal from "../modal/LoginModal";
+import RegisterModal from "../modal/RegisterModal";
+import Stepper from "../step/Stepper";
 
 function Navbar() {
   const router = useRouter();
@@ -27,16 +26,15 @@ function Navbar() {
     showRegisterModal,
     setShowRegisterModal,
   } = useContext(SystemContext);
-  const [activeLanguageIndex, setActiveLanguageIndex] = useState<number>(0);
 
   const HEADER_TEXT: string[] = [
     t("hairStyle.title"),
-    "Do you color or treat your hair ?",
-    "Select your hair goals",
-    "Customize your formula",
-    "Select your color",
-    "Select your fragrance",
-    "Make it your own!",
+    t("hairTreat.title"),
+    t("hairGoal.title"),
+    t("formula.title"),
+    t("color.title"),
+    t("scent.title"),
+    t("orderShampoo.title"),
   ];
 
   useEffect(() => {
@@ -100,7 +98,9 @@ function Navbar() {
       <header className="flex h-12 lg:h-20 px-2 py-2 bg-white drop-shadow-lg shadow-black">
         <div className="flex flex-grow items-center">
           <ChevronLeftIcon
-            className={`w-8 h-8 text-${!!currentStep ? "black" : "white"}`}
+            className={`w-8 h-8 text-${
+              !!currentStep ? "black" : "white"
+            } cursor-pointer`}
             onClick={() => {
               if (!!currentStep) {
                 handleGoBack();

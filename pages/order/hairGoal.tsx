@@ -1,3 +1,4 @@
+import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useRouter } from "next/router";
 import React, { ReactElement, useContext, useEffect } from "react";
@@ -5,7 +6,7 @@ import Button from "../../components/buttons/Button";
 import GridCard from "../../components/card/GridCard";
 import SubHeader from "../../components/SubHeader";
 import { OrderContext } from "../../contexts/OrderContext";
-import { hairGoal } from "../../interfaces/hair.interface";
+import { hairGoalData, IData } from "../../data/data";
 import { FormLayout } from "../../layouts/FormLayout";
 import type { NextPageWithLayout } from "../_app";
 
@@ -13,6 +14,7 @@ const MAXIMUM_HAIRGOAL_SELECT = 5;
 
 const HairGoal: NextPageWithLayout = () => {
   const router = useRouter();
+  const { t } = useTranslation();
 
   const { orderContext, setOrderContext, setCurrentStep } =
     useContext(OrderContext);
@@ -25,27 +27,27 @@ const HairGoal: NextPageWithLayout = () => {
     router.push("/order/hairFormula");
   }
 
-  function checkItemClicked(item: string): boolean {
+  function checkItemClicked(itemName: string): boolean {
     if (orderContext.hair_goal) {
-      return orderContext.hair_goal.includes(item);
+      return orderContext.hair_goal.includes(itemName);
     }
 
     return false;
   }
 
-  function onItemClicked(item: string): void {
+  function onItemClicked(item: IData): void {
     if (orderContext.hair_goal) {
-      if (checkItemClicked(item)) {
+      if (checkItemClicked(item.name)) {
         setOrderContext({
           ...orderContext,
           hair_goal: orderContext.hair_goal.filter(
-            (_item: string) => _item !== item
+            (_item: string) => _item !== item.name
           ),
         });
       } else if (orderContext.hair_goal.length < MAXIMUM_HAIRGOAL_SELECT) {
         setOrderContext({
           ...orderContext,
-          hair_goal: [...orderContext.hair_goal, item],
+          hair_goal: [...orderContext.hair_goal, item.name],
         });
       }
     }
@@ -54,16 +56,16 @@ const HairGoal: NextPageWithLayout = () => {
   return (
     <div className="flex flex-grow flex-col">
       <div className="flex flex-grow flex-col">
-        <SubHeader>{`choose up to ${MAXIMUM_HAIRGOAL_SELECT}`}</SubHeader>
+        <SubHeader>{t("hairGoal.subTitle")}</SubHeader>
         <div className="px-1 mb-2 grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-1">
-          {hairGoal.map((item: string, itemIndex) => (
+          {hairGoalData.map((item: IData, itemIndex) => (
             <GridCard
               key={itemIndex}
+              isActive={checkItemClicked(item.name)}
+              item={item}
               onClick={() => {
                 onItemClicked(item);
               }}
-              isActive={checkItemClicked(item)}
-              item={item}
             />
           ))}
         </div>
@@ -74,7 +76,7 @@ const HairGoal: NextPageWithLayout = () => {
         }}
         disabled={!!!orderContext.hair_goal?.length}
       >
-        Next
+        {t("button.next")}
       </Button>
     </div>
   );

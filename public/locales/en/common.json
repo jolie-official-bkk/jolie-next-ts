@@ -3,6 +3,10 @@
     "title": "Your Hair Your Choice",
     "button": "CREATE YOUR SHAMPOO"
   },
+  "button": {
+    "next": "Next",
+    "order": "Order"
+  },
   "hairStyle": {
     "title": "Choose your hair style",
     "naturalHairType": "Natural Hair Type",
@@ -16,5 +20,22 @@
   "hairGoal": {
     "title": "Select your hair goals",
     "subTitle": "choose up to 5"
+  },
+  "formula": {
+    "title": "Customize your fomula",
+    "subTitle": "Choose 3 formulas",
+    "recommendText": "Recommended formulas based on your goals"
+  },
+  "color": {
+    "title": "Select your color"
+  },
+  "scent": {
+    "title": "Select your fragrance"
+  },
+  "orderShampoo": {
+    "title": "Make it your own!",
+    "nameYourBottle": "Name your bottle!",
+    "shampooNamePlaceholder": "Your name",
+    "disclaimer": "This name will show on your bottle"
   }
 }

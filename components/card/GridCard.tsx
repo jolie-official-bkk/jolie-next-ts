@@ -1,14 +1,14 @@
-import React, { MouseEventHandler } from "react";
-import { camelCase } from "../../functions/camelCase";
-import { THairGoal, THairTreat } from "../../interfaces/hair.interface";
+import { useTranslation } from "next-i18next";
+import React, { ComponentProps } from "react";
+import { IData } from "../../data/data";
 
-type Props = {
+interface IGridCard extends ComponentProps<"div"> {
   isActive: boolean;
-  item: THairTreat | THairGoal;
-  onClick: MouseEventHandler;
-};
+  item: IData;
+}
 
-function GridCard({ isActive, item, onClick }: Props) {
+function GridCard({ isActive, item, onClick }: IGridCard) {
+  const { i18n } = useTranslation();
   return (
     <div
       className={`flex flex-grow h-14 items-center rounded-xl bg-${
@@ -19,13 +19,13 @@ function GridCard({ isActive, item, onClick }: Props) {
       }}
       onClick={onClick}
     >
-      <b
-        className={`flex items-center text-xl lg:text-2xl text-center mx-auto text-${
+      <p
+        className={`flex items-center text-md lg:text-lg text-center mx-auto px-2 text-${
           isActive ? "white" : "black"
         }`}
       >
-        {camelCase(item)}
-      </b>
+        {i18n.language === "en" ? item.en : item.th}
+      </p>
     </div>
   );
 }

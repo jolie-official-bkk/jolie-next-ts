@@ -1,25 +1,24 @@
 import { useTranslation } from "next-i18next";
 import Image from "next/image";
-import { MouseEventHandler } from "react";
+import { ComponentProps, MouseEventHandler } from "react";
 import { IData } from "../../data/data";
 
-interface IHairCard {
+interface IHairCard extends ComponentProps<"div"> {
   item: IData;
   imagePrefix: "hair-style" | "hair-structure" | "scalp-moisture";
   isActive: boolean;
-  // onClick: MouseEventHandler<HTMLDivElement>;
 }
 
-function HairCard({ item, imagePrefix, isActive }: IHairCard) {
+function HairCard({ item, imagePrefix, isActive, onClick }: IHairCard) {
   const { i18n } = useTranslation();
 
   return (
     <div
-      className="flex flex-col flex-grow max-w-md cursor-pointer"
+      className="flex flex-col flex-grow max-w-[240px] cursor-pointer"
       style={{
         boxShadow: "2px 5px 10px 1px rgba(0, 0, 0, 0.3)",
       }}
-      // onClick={onClick}
+      onClick={onClick}
     >
       <Image
         src={`${
