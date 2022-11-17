@@ -11,7 +11,7 @@ import { useTranslation } from "next-i18next";
 
 const HairScent: NextPageWithLayout = () => {
   const router = useRouter();
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const { orderContext, setOrderContext, setCurrentStep } =
     useContext(OrderContext);
@@ -64,7 +64,7 @@ const HairScent: NextPageWithLayout = () => {
         }}
         disabled={!orderContext.scent}
       >
-        Next
+        {t("button.next")}
       </Button>
     </div>
   );

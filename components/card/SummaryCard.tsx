@@ -1,8 +1,7 @@
 import Image from "next/image";
 import React, { ReactNode, useContext } from "react";
 import { OrderContext } from "../../contexts/OrderContext";
-import { FormulaData } from "../../data/formulaData";
-import { HAIR_GOAL_MATCH } from "../../data/hairGoalMatch";
+import { formulaData } from "../../data/data";
 
 type Props = {
   children: ReactNode;
@@ -22,7 +21,7 @@ function SummaryCard() {
   );
 
   return (
-    <div className="flex flex-grow flex-col w-full items-center border-2 pt-2 border-black">
+    <div className="flex flex-grow flex-col w-full max-w-sm items-center border-2 pt-2 border-black">
       <h1 className="font-extrabold">JOLIE</h1>
       <h2 className="font-medium" style={{ fontSize: "0.6rem" }}>
         PREMIUM CUSTOMIZED SHAMPOO
@@ -38,8 +37,8 @@ function SummaryCard() {
           ? orderContext.formula
               .map(
                 (formula) =>
-                  FormulaData.filter(
-                    (_formula) => _formula.formulaName === formula
+                  formulaData.filter(
+                    (_formula) => _formula.formulaName.name === formula
                   )[0].property
               )
               .join(" • ")

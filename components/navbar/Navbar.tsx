@@ -9,6 +9,7 @@ import { SystemContext } from "../../contexts/SystemContext";
 import { UserContext } from "../../contexts/UserContext";
 import Header from "../Header";
 import LoginModal from "../modal/LoginModal";
+import OrderResponseModal from "../modal/OrderResponseModal";
 import RegisterModal from "../modal/RegisterModal";
 import Stepper from "../step/Stepper";
 
@@ -25,6 +26,8 @@ function Navbar() {
     setShowLoginModal,
     showRegisterModal,
     setShowRegisterModal,
+    showOrderResponseModal,
+    setShowOrderResponseModal,
   } = useContext(SystemContext);
 
   const HEADER_TEXT: string[] = [
@@ -43,7 +46,7 @@ function Navbar() {
       if (isSubscribed) {
         if (response?.status === "OK" && user === null) {
           setUser(response.data);
-          const token = localStorage.getItem("token");
+          const token = localStorage.getItem("jolie-token");
           if (user === null && token !== null) {
             await getUserInfo(token).then((response) => {
               if (response?.status === "OK") {
@@ -67,7 +70,7 @@ function Navbar() {
 
   async function handleGetUserInfo(): Promise<any> {
     try {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem("jolie-token");
       if (token !== null) {
         return await getUserInfo(token);
       }
@@ -87,7 +90,7 @@ function Navbar() {
   }
 
   function handleLogout(): void {
-    localStorage.removeItem("token");
+    localStorage.removeItem("jolie-token");
     setUser(null);
     setIsAuthenticated(false);
     setIsAuthenticated(false);
@@ -121,19 +124,26 @@ function Navbar() {
         <div className="flex flex-grow justify-end items-center">
           {currentStep === 0 && (
             <div
-              className="flex absolute right-12 cursor-pointer"
+              className="flex absolute right-12 cursor-pointer bg-white"
               onClick={() => {
                 handleToggleLanguage();
               }}
             >
               <p
-                className={`${i18n.language === "en" ? "font-extrabold" : ""}`}
+                className={`${
+                  i18n.language === "en"
+                    ? "font-extrabold bg-black text-white rounded-tl-md rounded-bl-md"
+                    : ""
+                } px-1.5`}
               >
                 EN
               </p>
-              /
               <p
-                className={`${i18n.language === "th" ? "font-extrabold" : ""}`}
+                className={`${
+                  i18n.language === "th"
+                    ? "font-extrabold bg-black text-white rounded-tr-md rounded-br-md"
+                    : ""
+                } px-1.5`}
               >
                 TH
               </p>
@@ -164,15 +174,20 @@ function Navbar() {
       </header>
       {!!currentStep && <Stepper step={currentStep} />}
       {!!currentStep && <Header>{HEADER_TEXT[currentStep - 1]}</Header>}
-      <LoginModal
-        showLoginModal={showLoginModal}
-        setShowLoginModal={setShowLoginModal}
-        setShowRegisterModal={setShowRegisterModal}
-      />
-      <RegisterModal
-        showRegisterModal={showRegisterModal}
-        setShowRegisterModal={setShowRegisterModal}
-      />
+      {showLoginModal && (
+        <LoginModal
+          setShowLoginModal={setShowLoginModal}
+          setShowRegisterModal={setShowRegisterModal}
+        />
+      )}
+      {showRegisterModal && (
+        <RegisterModal setShowRegisterModal={setShowRegisterModal} />
+      )}
+      {showOrderResponseModal && (
+        <OrderResponseModal
+          setShowOrderResponseModal={setShowOrderResponseModal}
+        />
+      )}
     </div>
   );
 }

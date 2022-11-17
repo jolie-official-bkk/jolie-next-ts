@@ -21,7 +21,7 @@ export async function apiHandler(
       data: body,
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.token}`,
+        Authorization: `Bearer ${localStorage.getItem("jolie-token")}`,
       },
     });
 

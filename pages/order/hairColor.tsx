@@ -11,7 +11,7 @@ import { NextPageWithLayout } from "../_app";
 
 const HairColor: NextPageWithLayout = () => {
   const router = useRouter();
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const { orderContext, setOrderContext, setCurrentStep } =
     useContext(OrderContext);
@@ -64,7 +64,7 @@ const HairColor: NextPageWithLayout = () => {
         }}
         disabled={!orderContext.color}
       >
-        Next
+        {t("button.next")}
       </Button>
     </div>
   );

@@ -11,8 +11,13 @@
   }
 }
 
+@font-face {
+  font-family: "gill sans mt";
+  src: url("../assets/GillSansMT/gill-sans-mt.ttf");
+}
+
 * {
-  font-family: "Noto Sans Thai", sans-serif;
+  font-family: "gill sans mt", "Noto sans thai", sans-serif;
   /* font-weight: 100; */
 }
 

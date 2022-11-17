@@ -13,11 +13,6 @@ import {
   formulaIngredientData,
 } from "../../data/data";
 import { HAIR_GOAL_MATCH } from "../../data/hairGoalMatch";
-import {
-  formulaName,
-  TFormulaName,
-  THairGoal,
-} from "../../interfaces/hair.interface";
 import { FormLayout } from "../../layouts/FormLayout";
 import { NextPageWithLayout } from "../_app";
 
@@ -39,7 +34,7 @@ const HairFormula: NextPageWithLayout = () => {
     router.push("/order/hairColor");
   }
 
-  function getRecommendedFormula(hair_goal: THairGoal[]) {
+  function getRecommendedFormula(hair_goal: string[]) {
     let recommendedFormula: any[] = [];
     hair_goal.forEach((each, index) => {
       const result = HAIR_GOAL_MATCH.get(each);

@@ -26,7 +26,7 @@ const Home: NextPageWithLayout = () => {
 
   async function validateToken(): Promise<void> {
     try {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem("jolie-token");
 
       if (token !== null) {
         await handleValidateToken(token).then(async (response) => {

@@ -11,7 +11,7 @@ export const HAIR_GOAL_MATCH = new Map<THairGoal, string[]>([
   // ["reduce brassiness", ["Color Protection", "Damage Remedy"]],
   ["rejuvenate", ["Strengthen", "Damage Remedy"]],
   ["shine", ["Shine"]],
-  ["straighten", ["Strengthen"]],
-  ["thermal Protection", ["Thermal Protection"]],
+  ["strengthen", ["Strengthen"]],
+  ["thermal protection", ["Thermal Protection"]],
   ["volumize", ["Strengthen"]],
 ]);

@@ -12,7 +12,10 @@ import React, {
 import { placeOrder } from "../../api/order";
 import Button from "../../components/buttons/Button";
 import SummaryCard from "../../components/card/SummaryCard";
+import CircleSpinner from "../../components/loading/CircleSpinner";
 import { OrderContext } from "../../contexts/OrderContext";
+import { SystemContext } from "../../contexts/SystemContext";
+import { UserContext } from "../../contexts/UserContext";
 import { FormLayout } from "../../layouts/FormLayout";
 import type { NextPageWithLayout } from "../_app";
 
@@ -23,26 +26,31 @@ const OrderShampoo: NextPageWithLayout = () => {
   const { t } = useTranslation();
   const { orderContext, setOrderContext, setCurrentStep } =
     useContext(OrderContext);
-  const [buttonText, setButtonText] = useState<string>("Order!");
+  const { isAuthenticated } = useContext(UserContext);
+  const { setShowLoginModal, setShowOrderResponseModal } =
+    useContext(SystemContext);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
   useEffect(() => {
     setCurrentStep(7);
   }, []);
 
   async function handleSubmitOrder(): Promise<void> {
-    const requestBody = JSON.stringify(orderContext);
-    console.log(requestBody);
+    if (!isAuthenticated) {
+      setShowLoginModal(true);
+    } else {
+      setIsSubmitting(true);
+      const requestBody = JSON.stringify(orderContext);
 
-    await placeOrder(requestBody)
-      .then(() => {
-        setButtonText("Done!");
-        setTimeout(() => {
-          router.push("/");
-        }, 2000);
-      })
-      .catch((error: any) => {
-        console.error(error.message);
-      });
+      await placeOrder(requestBody)
+        .then(() => {
+          setIsSubmitting(false);
+          setShowOrderResponseModal(true);
+        })
+        .catch((error: any) => {
+          console.error(error.message);
+        });
+    }
   }
 
   function onChange(event: ChangeEvent<HTMLInputElement>): void {
@@ -54,19 +62,19 @@ const OrderShampoo: NextPageWithLayout = () => {
 
   return (
     <div className="flex flex-grow flex-col">
-      <div className="flex flex-grow items-center">
+      <div className="flex flex-grow items-center justify-center">
         <Image
           src={`${process.env.REACT_APP_S3_PREFIX}/bottle/bottle-${
             orderContext.color?.toLocaleLowerCase().split(" ").join("-") ||
             "no-color"
           }.png`}
           alt={"bottle"}
-          className="object-contain w-5/12 scale-150"
+          className="object-contain w-5/12 max-w-xs scale-150"
           width={300}
           height={400}
           priority
         />
-        <div className="flex flex-grow max-h-80 flex-col pr-5">
+        <div className="flex max-h-80 flex-col pr-5">
           <SummaryCard />
         </div>
       </div>
@@ -90,9 +98,10 @@ const OrderShampoo: NextPageWithLayout = () => {
         onClick={() => {
           handleSubmitOrder();
         }}
-        disabled={!orderContext.shampoo_name}
+        disabled={!orderContext.shampoo_name || isSubmitting}
       >
-        {t("button.order")}!
+        {isSubmitting && <CircleSpinner />}
+        {!isSubmitting && <p>{t("button.order")!}</p>}
       </Button>
     </div>
   );
