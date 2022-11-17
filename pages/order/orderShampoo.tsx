@@ -64,7 +64,7 @@ const OrderShampoo: NextPageWithLayout = () => {
     <div className="flex flex-grow flex-col">
       <div className="flex flex-grow items-center justify-center">
         <Image
-          src={`${process.env.REACT_APP_S3_PREFIX}/bottle/bottle-${
+          src={`${process.env.REACT_APP_S3_PREFIX}/images/bottle/bottle-${
             orderContext.color?.toLocaleLowerCase().split(" ").join("-") ||
             "no-color"
           }.png`}

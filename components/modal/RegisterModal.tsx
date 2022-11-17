@@ -28,7 +28,7 @@ function RegisterModal({ setShowRegisterModal }: PropsType) {
     password: "",
     confirm_password: "",
     date_of_birth: new Date(new Date().toUTCString()),
-    gender: "male",
+    gender: "Male",
   });
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 

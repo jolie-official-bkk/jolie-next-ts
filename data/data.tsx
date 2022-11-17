@@ -48,8 +48,8 @@ export const scalpMoistureData: IData[] = [
     th: "แห้ง",
   },
   {
-    name: "balanced",
-    en: "Balanced",
+    name: "normal",
+    en: "Normal",
     th: "ธรรมดา",
   },
   {
@@ -241,7 +241,7 @@ export const formulaIngredientData: IData[] = [
     id: 11,
     name: "macadamia",
     en: "macadamia",
-    th: "มะคาเดเมีย",
+    th: "แมคคาเดเมีย",
   },
   {
     id: 12,
@@ -393,37 +393,37 @@ export interface IColor extends IData {
 
 export const colorData: IColor[] = [
   {
-    name: "blue monday",
+    name: "Blue Monday",
     en: "Blue Monday",
     th: "ฟ้า",
     hexColor: "#AEF4F9",
   },
   {
-    name: "emerald",
+    name: "Emerald",
     en: "Emerald",
     th: "เขียว",
     hexColor: "#AEF9C3",
   },
   {
-    name: "pink skies",
+    name: "Pink Skies",
     en: "Pink Skies",
     th: "ชมพู",
     hexColor: "#F9CAF4",
   },
   {
-    name: "purple rain",
+    name: "Purple Rain",
     en: "Purple Rain",
     th: "ม่วง",
     hexColor: "#CFBAFC",
   },
   {
-    name: "tangerine",
+    name: "Tangerine",
     en: "Tangerine",
     th: "ส้ม",
     hexColor: "#F9C0AE",
   },
   {
-    name: "no color",
+    name: "No Color",
     en: "No Color",
     th: "ไม่มีสี",
     hexColor: "#DEDEDE",

@@ -23,7 +23,7 @@ function HairCard({ item, imagePrefix, isActive, onClick }: IHairCard) {
       <Image
         src={`${
           process.env.REACT_APP_S3_PREFIX
-        }/hairStyle/${imagePrefix}-${item.name.toLowerCase()}.png`}
+        }/images/hairStyle/${imagePrefix}-${item.name.toLowerCase()}.png`}
         alt={"item not found"}
         width={240}
         height={240}

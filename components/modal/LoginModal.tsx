@@ -89,7 +89,7 @@ function LoginModal({ setShowLoginModal, setShowRegisterModal }: PropsType) {
                 onChange={(event) => onSubmissionChange(event)}
               />
               <TextInput
-                label={"password"}
+                label={"Password"}
                 name={"password"}
                 type={"password"}
                 onChange={(event) => onSubmissionChange(event)}

@@ -4,7 +4,7 @@ function Logo() {
   return (
     <div className="flex w-full items-center">
       <Image
-        src={`${process.env.REACT_APP_S3_PREFIX}/logo.png`}
+        src={`${process.env.REACT_APP_S3_PREFIX}/images/logo.png`}
         alt="logo image"
         className="object-contain w-12 h-12 mr-2"
         width={48}

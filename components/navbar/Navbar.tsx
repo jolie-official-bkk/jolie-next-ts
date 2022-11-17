@@ -151,7 +151,7 @@ function Navbar() {
           )}
           {!isAuthenticated && (
             <Image
-              src={`${process.env.REACT_APP_S3_PREFIX}/user-icon.png`}
+              src={`${process.env.REACT_APP_S3_PREFIX}/images/user-icon.png`}
               alt={"user icon"}
               className="w-8 h-8 p-1.5 cursor-pointer"
               width={32}

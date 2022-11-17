@@ -1,5 +1,6 @@
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/outline";
 import React, { Dispatch, SetStateAction, useState } from "react";
+import { camelCase } from "../../functions/camelCase";
 import {
   genderTypeArray,
   IRegister,
@@ -25,7 +26,7 @@ function Dropdown({ label, submission, setSubmission, value }: PropsType) {
       </label>
       <div
         id="dropdownInformationButton"
-        className="flex justify-between items-center bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5 text-black"
+        className="flex justify-between items-center bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5"
         onClick={() => {
           setShowDrowDown((prev) => !prev);
         }}
@@ -47,10 +48,10 @@ function Dropdown({ label, submission, setSubmission, value }: PropsType) {
               className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
               onClick={() => {
                 setShowDrowDown(false);
-                setSubmission({ ...submission, gender: gender });
+                setSubmission({ ...submission, gender: camelCase(gender) });
               }}
             >
-              {gender}
+              {camelCase(gender)}
             </li>
           ))}
         </ul>

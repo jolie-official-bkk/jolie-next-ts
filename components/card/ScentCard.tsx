@@ -25,26 +25,30 @@ function ScentCard({
       onClick={onClick}
     >
       <Image
-        src={`${process.env.REACT_APP_S3_PREFIX}/scent/${imageName}.jpg`}
+        src={`${process.env.REACT_APP_S3_PREFIX}/images/scent/${imageName}.jpg`}
         alt={"scent image"}
         className={"h-32 object-cover rounded-xl"}
         width={300}
         height={300}
         priority
       />
-      <b
-        className={`text-[11px] text-${isActive ? "white" : "black"} pt-${
-          !!scentIngredients.length ? 1 : 2
-        }`}
-      >{`${scent}`}</b>
-      {!!scentIngredients.length && (
-        <p
-          className={`font-medium text-${isActive ? "white" : "black/60"}`}
-          style={{ fontSize: "0.7rem" }}
-        >
-          {scentIngredients.join(", ")}
-        </p>
-      )}
+      <div className="text-center flex flex-col justify-center">
+        <b
+          className={`relative top-1 text-[11px] text-${
+            isActive ? "white" : "black"
+          }`}
+        >{`${scent}`}</b>
+        {!!scentIngredients.length && (
+          <p
+            className={`relative bottom-0.5 font-medium text-${
+              isActive ? "white" : "black/60"
+            }`}
+            style={{ fontSize: "0.7rem" }}
+          >
+            {scentIngredients.join(", ")}
+          </p>
+        )}
+      </div>
     </div>
   );
 }

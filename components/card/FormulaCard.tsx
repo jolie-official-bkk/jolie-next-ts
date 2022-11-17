@@ -27,7 +27,7 @@ function FormulaCard({
       onClick={onClick}
     >
       <Image
-        src={`${process.env.REACT_APP_S3_PREFIX}/formula/${imageName}.jpg`}
+        src={`${process.env.REACT_APP_S3_PREFIX}/images/formula/${imageName}.jpg`}
         alt={"formula image"}
         className={"h-24 rounded-tl-md rounded-bl-md object-cover"}
         width={240}
