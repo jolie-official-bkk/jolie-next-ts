@@ -31,7 +31,9 @@ function HairCard({ item, imagePrefix, isActive, onClick }: IHairCard) {
       <p
         className={`flex flex-col h-8 justify-center text-${
           isActive ? "white" : "black"
-        } text-center text-sm md:text-xl bg-${isActive ? "black" : "white"}`}
+        } text-center text-sm md:text-xl bg-${
+          isActive ? "black" : "white"
+        } transition ease 300`}
       >
         {i18n.language === "en" ? item.en : item.th}
       </p>

@@ -22,7 +22,7 @@ function FormulaCard({
     <div
       className={`flex max-w-sm w-screen bg-${
         isActive ? "black" : "white"
-      } rounded-md mb-2`}
+      } rounded-md mb-2 transition ease 300`}
       style={{ boxShadow: "0 3px 3px 2px rgba(0, 0, 0, 0.3)" }}
       onClick={onClick}
     >

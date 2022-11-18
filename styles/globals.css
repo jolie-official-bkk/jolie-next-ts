@@ -10,14 +10,14 @@
     @apply bg-[white] bg-no-repeat bg-cover bg-center bg-fixed text-[black];
   }
 }
-
+/* 
 @font-face {
   font-family: "gill sans mt";
   src: url("../assets/GillSansMT/gill-sans-mt.ttf");
-}
+} */
 
 * {
-  font-family: "gill sans mt", "Noto sans thai", sans-serif;
+  font-family: "Noto sans thai", sans-serif;
   /* font-weight: 100; */
 }
 

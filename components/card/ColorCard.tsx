@@ -13,7 +13,7 @@ function ColorCard({ hexColor, colorName, isActive, onClick }: Props) {
       <div
         className={`flex flex-col flex-grow max-w-[200px] items-center m-auto p-3 pb-0 bg-${
           isActive ? "black" : "white"
-        } rounded-xl`}
+        } rounded-xl transition ease 300`}
         style={{ boxShadow: "0 0 5px 2px rgba(0, 0, 0, 0.3)" }}
       >
         <div

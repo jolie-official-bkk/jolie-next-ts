@@ -111,14 +111,14 @@ function RegisterModal({ setShowRegisterModal }: PropsType) {
                 onChange={(event) => onSubmissionChange(event)}
               />
               <TextInput
-                label={"Confirm Your password"}
+                label={"Confirm your password"}
                 name={"confirm_password"}
                 type={"password"}
                 onChange={(event) => onSubmissionChange(event)}
               />
               <div className="flex pb-2">
                 <TextInput
-                  label={"Date Of Birth"}
+                  label={"Date of birth"}
                   name={"date_of_birth"}
                   type={"date"}
                   onChange={(event) => onSubmissionChange(event)}

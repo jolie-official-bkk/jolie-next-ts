@@ -13,7 +13,7 @@ function GridCard({ isActive, item, onClick }: IGridCard) {
     <div
       className={`flex flex-grow h-14 items-center rounded-xl bg-${
         isActive ? "black" : "white"
-      } cursor-pointer`}
+      } cursor-pointer transition ease 300`}
       style={{
         boxShadow: "0px 3px 5px 1px rgba(0, 0, 0, 0.3)",
       }}

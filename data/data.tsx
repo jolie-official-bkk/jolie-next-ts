@@ -423,8 +423,8 @@ export const colorData: IColor[] = [
     hexColor: "#F9C0AE",
   },
   {
-    name: "No Color",
-    en: "No Color",
+    name: "Transparent",
+    en: "Transparent (No Color)",
     th: "ไม่มีสี",
     hexColor: "#DEDEDE",
   },
@@ -525,41 +525,41 @@ export interface IScentData {
 export const ScentData: IScentData[] = [
   {
     location: {
-      name: "Gardens by the Bay At Singapore",
-      en: "Gardens by the Bay At Singapore",
-      th: "การ์เด้นบายเดอะเบย์ แอท สิงคโปร์",
+      name: "Gardens by the Bay",
+      en: "Gardens by the Bay",
+      th: "การ์เด้นบายเดอะเบย์",
     },
     scentIngredientIds: [13, 7, 6],
   },
   {
     location: {
-      name: "Han River In October At Korea",
-      en: "Han River In October At Korea",
-      th: "ฮันริเวอร์อินออคโทเบอร์ แอท โคเรีย",
+      name: "Han River In October",
+      en: "Han River In October",
+      th: "ฮันริเวอร์อินออคโทเบอร์",
     },
     scentIngredientIds: [5, 4, 11],
   },
   {
     location: {
-      name: "Maldives Sunset At Maldives",
-      en: "Maldives Sunset At Maldives",
-      th: "มัลดีฟส์ซันเซ็ท แอท มัลดีฟส์",
+      name: "Maldives Sunset",
+      en: "Maldives Sunset",
+      th: "มัลดีฟส์ซันเซ็ท",
     },
     scentIngredientIds: [1, 3, 12],
   },
   {
     location: {
-      name: "Shibuya Morning At Japan",
-      en: "Shibuya Morning At Japan",
-      th: "ชิบูย่ามอร์นิ่ง แอท เจแปน",
+      name: "Shibuya Morning",
+      en: "Shibuya Morning",
+      th: "ชิบูย่ามอร์นิ่ง",
     },
     scentIngredientIds: [14, 9, 2],
   },
   {
     location: {
-      name: "Thonglor Night Club At Thailand",
-      en: "Thonglor Night Club At Thailand",
-      th: "ทองหล่อไนท์คลับ แอท ไทยแลนด์",
+      name: "Thonglor Night Club",
+      en: "Thonglor Night Club",
+      th: "ทองหล่อไนท์คลับ",
     },
     scentIngredientIds: [2, 8, 10],
   },

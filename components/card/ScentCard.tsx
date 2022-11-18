@@ -20,7 +20,7 @@ function ScentCard({
     <div
       className={`flex flex-col flex-grow max-w-[200px] mx-auto items-center bg-${
         isActive ? "black" : "white"
-      } rounded-xl`}
+      } rounded-xl transition ease 300`}
       style={{ boxShadow: "0 0 5px 2px rgba(0, 0, 0, 0.3)" }}
       onClick={onClick}
     >
@@ -36,11 +36,11 @@ function ScentCard({
         <b
           className={`relative top-1 text-[11px] text-${
             isActive ? "white" : "black"
-          }`}
+          } ${!!scentIngredients.length ? "" : "mt-2"}`}
         >{`${scent}`}</b>
         {!!scentIngredients.length && (
           <p
-            className={`relative bottom-0.5 font-medium text-${
+            className={`relative pb-1.5 font-medium text-${
               isActive ? "white" : "black/60"
             }`}
             style={{ fontSize: "0.7rem" }}
